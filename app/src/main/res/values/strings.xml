@@ -18,9 +18,14 @@
 	<string name="register_code_hint">请输入验证码</string>
 	<string name="register_psw">密码</string>
 	<string name="register_psw_hint">请输入6-18位密码</string>
+	<string name="register_psw_hint2">密码为6-18位，请重试</string>
 	<string name="register_invate_code">邀请码</string>
 	<string name="register_invate_code_hint">请输入邀请码</string>
 	<string name="register_licence">点击"注册"表示您已经同意《用户协议》</string>
 	<string name="register_login">已有账号？点击登录</string>
+	<string name="register_fail">注册失败请重试！</string>
+	<string name="register_succeed">注册成功！</string>
+	<string name="register_validate_code_succeed">验证码发送成功！</string>
+	<string name="register_validate_code_fail">验证码发送失败！</string>
 
 </resources>

@@ -211,13 +211,14 @@
                     android:layout_toRightOf="@+id/register_code_text"
                     />
 
-            <TextView
-                    android:id="@+id/tv_get_code"
+            <com.wisdom.project.weight.CountDownButton
+                    android:id="@+id/btn_get_code"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/distance_30dp"
                     android:text="@string/register_get_code"
                     android:textColor="@color/base_red"
-                    android:textSize="@dimen/font_size_18sp"
+                    android:textSize="@dimen/font_size_16sp"
+                    android:background="@color/translucent"
                     android:textStyle="bold"
                     android:layout_alignParentRight="true"
 

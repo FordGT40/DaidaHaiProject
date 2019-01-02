@@ -11,4 +11,5 @@ package com.wisdom
 object ConstantUrl {
     val BASE_URL = "https://api.haximeishi.com/"//线上
     val LOGIN_URL="customer/register"//login
+    val GET_VALIDATE_CODE_URL="customer/getCaptcha"//获取验证码
 }
