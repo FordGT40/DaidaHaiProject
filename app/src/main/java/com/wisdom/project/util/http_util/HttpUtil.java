@@ -20,11 +20,12 @@ public class HttpUtil {
     public static String getAbsolteUrl(String relativeUrl) {
         return ConstantUrl.INSTANCE.getBASE_URL() + relativeUrl;
     }
+
     /**
      * HttpGet方法访问接口
      */
     public static void httpGet(String url, HttpParams params, JsonCallback callback) {
-        Log.i("123", "访问的URL: "+getAbsolteUrl(url));
+        Log.i("123", "访问的URL: " + getAbsolteUrl(url));
         OkGo.get(getAbsolteUrl(url))
                 .connTimeOut(3000)
                 .cacheMode(CacheMode.DEFAULT)
@@ -53,6 +54,7 @@ public class HttpUtil {
                 .params(params)
                 .execute(callback);
     }
+
     /**
      * HttpGet方法访问接口
      */
@@ -65,6 +67,7 @@ public class HttpUtil {
 
     /**
      * Multipart方式提交post表单
+     *
      * @param url
      * @param params
      * @param callback
@@ -76,6 +79,7 @@ public class HttpUtil {
                 .isMultipart(true)
                 .execute(callback);
     }
+
     /**
      * 上传文件的相关方法
      *
@@ -90,6 +94,7 @@ public class HttpUtil {
                 .cacheMode(CacheMode.DEFAULT)
                 .execute(callback);
     }
+
     /**
      * 上传文件的相关方法
      *
@@ -105,4 +110,19 @@ public class HttpUtil {
                 .execute(callback);
     }
 
+    /**
+     * raw json方式提交数据
+     *
+     * @return a
+     * @describe a
+     * @author HanXueFeng
+     * @time 2019/1/2  17:33
+     */
+    public static void httpPostWithoutBaseString(String url, String params, StringCallback callback) {
+        OkGo.post(getAbsolteUrl(url))
+                .cacheMode(CacheMode.DEFAULT)
+                .upJson(params)
+                .headers("Content-type", "application/json")
+                .execute(callback);
+    }
 }

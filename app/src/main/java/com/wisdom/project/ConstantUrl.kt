@@ -9,5 +9,6 @@ package com.wisdom
  * @change
  */
 object ConstantUrl {
-    val BASE_URL = ""//线上
+    val BASE_URL = "https://api.haximeishi.com/"//线上
+    val LOGIN_URL="customer/register"//login
 }
