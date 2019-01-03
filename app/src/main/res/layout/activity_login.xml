@@ -51,6 +51,7 @@
                     />
 
             <EditText
+                    android:text="18686703845"
                     android:inputType="phone"
                     android:layout_marginRight="@dimen/distance_5dp"
                     android:layout_width="match_parent"
@@ -102,6 +103,7 @@
                     />
 
             <EditText
+                    android:text="123456"
                     android:inputType="textPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

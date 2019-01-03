@@ -14,4 +14,6 @@ object ConstantUrl {
     const val GET_VALIDATE_CODE_URL = "customer/getCaptcha"//获取验证码
     const val LOGIN_URL = "customer/login"//登录
     const val RESET_PSW_URL = "customer/modifyPassword"//修改密码
+    const val GET_PERSONAL_INFO_URL = "customer/detail"//获得个人信息
+    const val LOGOUT_URL = "customer/logout"//退出，注销
 }

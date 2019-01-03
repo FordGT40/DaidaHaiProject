@@ -7,7 +7,6 @@ import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.HttpParams;
 import com.wisdom.ConstantUrl;
 import com.wisdom.project.util.http_util.callback.JsonCallback;
-import okhttp3.MediaType;
 
 
 /**
@@ -48,6 +47,20 @@ public class HttpUtil {
 
     }
 
+    public static void httpGetWithToken(String url, HttpParams params, String token, JsonCallback callback) {
+        OkGo.get(getAbsolteUrl(url))
+                .cacheMode(CacheMode.DEFAULT)
+                .params(params)
+                .headers("token", token)
+                .execute(callback);
+    }
+    public static void httpGetWithToken(String url, HttpParams params, String token, StringCallback callback) {
+        OkGo.get(getAbsolteUrl(url))
+                .cacheMode(CacheMode.DEFAULT)
+                .params(params)
+                .headers("token", token)
+                .execute(callback);
+    }
     /**
      * HttpGet方法访问接口
      */

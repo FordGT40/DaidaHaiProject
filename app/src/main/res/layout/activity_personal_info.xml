@@ -6,68 +6,10 @@
         android:background="#f7f7f7"
         android:layout_height="match_parent">
 
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:background="@color/base_red"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            android:layout_height="121dp">
-
-        <TextView
-                android:id="@+id/comm_head_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:maxEms="8"
-                android:layout_marginTop="@dimen/distance_10dp"
-                android:text="@string/mine_title"
-                android:textColor="@color/white"
-                android:textSize="@dimen/title_textsize"/>
-
-        <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                >
-
-            <ImageView
-                    android:id="@+id/iv_mine_head_img"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/distance_15dp"
-                    android:scaleType="fitXY"
-                    android:adjustViewBounds="true"
-                    android:src="@mipmap/ic_launcher"
-                    />
-
-            <TextView
-                    android:id="@+id/tv_mine_login"
-                    android:layout_toRightOf="@+id/iv_mine_head_img"
-                    android:layout_centerVertical="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/font_size_18sp"
-                    android:text="@string/mine_hint"
-                    android:textColor="@color/white"
-                    android:layout_marginLeft="@dimen/distance_10dp"
-                    />
-
-            <ImageView
-                    android:id="@+id/iv_login"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/distance_15dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitXY"
-                    android:src="@mipmap/arrow"
-                    />
-        </RelativeLayout>
-    </LinearLayout>
+    <include layout="@layout/head_title_bar"/>
 
     <LinearLayout
+            android:layout_marginTop="@dimen/distance_15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -75,7 +17,108 @@
             >
 
         <RelativeLayout
-                android:id="@+id/rl_mine_personal_info"
+                android:id="@+id/rl_personal_info_head"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/distance_80dp"
+                >
+
+            <TextView
+                    android:id="@+id/tv_head_img"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/distance_15dp"
+                    android:textSize="@dimen/font_size_16sp"
+                    android:text="@string/personal_head_img"
+                    android:layout_alignParentLeft="true"
+                    />
+
+            <ImageView
+                    android:id="@+id/iv_head"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/ic_launcher"
+                    android:layout_marginRight="50dp"
+                    />
+
+            <ImageView
+                    android:id="@+id/iv_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:adjustViewBounds="true"
+                    android:layout_marginRight="@dimen/distance_15dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/arrow"
+                    />
+
+        </RelativeLayout>
+
+        <LinearLayout
+                android:layout_marginLeft="@dimen/distance_15dp"
+                android:layout_marginRight="@dimen/distance_15dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#cccccc"
+                />
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/distance_50dp"
+                android:id="@+id/rl_personal_info_alter_name"
+                >
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/distance_15dp"
+                    android:textSize="@dimen/font_size_16sp"
+                    android:text="@string/personal_head_name"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="14dp"/>
+
+            <TextView
+                    android:id="@+id/tv_personal_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:text="还木有昵称"
+                    android:textSize="@dimen/font_size_16sp"
+                    android:layout_marginRight="50dp"
+
+                    />
+
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:adjustViewBounds="true"
+                    android:layout_marginRight="@dimen/distance_15dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/arrow"
+                    />
+
+        </RelativeLayout>
+
+        <LinearLayout
+
+                android:layout_marginLeft="@dimen/distance_15dp"
+                android:layout_marginRight="@dimen/distance_15dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#cccccc"
+                />
+
+        <RelativeLayout
+                android:id="@+id/rl_personal_info_alter_active_code"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/distance_50dp"
                 >
@@ -86,8 +129,20 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/distance_15dp"
                     android:textSize="@dimen/font_size_16sp"
-                    android:text="@string/mine_personal_info"
+                    android:text="@string/personal_head_phone"
                     android:layout_alignParentLeft="true"
+                    />
+
+            <TextView
+                    android:id="@+id/tv_personal_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:text="13100000000"
+                    android:textSize="@dimen/font_size_16sp"
+                    android:layout_marginRight="50dp"
+
                     />
 
             <ImageView
@@ -112,9 +167,9 @@
                 />
 
         <RelativeLayout
+                android:id="@+id/rl_personal_info_alter_sex"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/distance_50dp"
-                android:id="@+id/rl_mine_alter_psw"
                 >
 
             <TextView
@@ -123,83 +178,20 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/distance_15dp"
                     android:textSize="@dimen/font_size_16sp"
-                    android:text="@string/mine_alter_psw"
+                    android:text="@string/personal_head_sex"
                     android:layout_alignParentLeft="true"
                     />
 
-            <ImageView
+            <TextView
+                    android:id="@+id/tv_personal_sex"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
-                    android:adjustViewBounds="true"
-                    android:layout_marginRight="@dimen/distance_15dp"
-                    android:scaleType="fitXY"
-                    android:src="@mipmap/arrow"
-                    />
-
-        </RelativeLayout>
-
-        <LinearLayout
-
-                android:layout_marginLeft="@dimen/distance_15dp"
-                android:layout_marginRight="@dimen/distance_15dp"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#cccccc"
-                />
-
-        <RelativeLayout
-                android:id="@+id/rl_mine_alter_active_code"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/distance_50dp"
-                >
-
-            <TextView
-                    android:layout_centerVertical="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/distance_15dp"
+                    android:text="女"
                     android:textSize="@dimen/font_size_16sp"
-                    android:text="@string/mine_alter_active_code"
-                    android:layout_alignParentLeft="true"
-                    />
+                    android:layout_marginRight="50dp"
 
-            <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:adjustViewBounds="true"
-                    android:layout_marginRight="@dimen/distance_15dp"
-                    android:scaleType="fitXY"
-                    android:src="@mipmap/arrow"
-                    />
-
-        </RelativeLayout>
-
-        <LinearLayout
-                android:layout_marginLeft="@dimen/distance_15dp"
-                android:layout_marginRight="@dimen/distance_15dp"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#cccccc"
-                />
-
-        <RelativeLayout
-                android:id="@+id/rl_mine_check_update"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/distance_50dp"
-                >
-
-            <TextView
-                    android:layout_centerVertical="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/distance_15dp"
-                    android:textSize="@dimen/font_size_16sp"
-                    android:text="@string/mine_check_update"
-                    android:layout_alignParentLeft="true"
                     />
 
             <ImageView
@@ -223,4 +215,32 @@
                 android:background="#cccccc"
                 />
     </LinearLayout>
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#f7f7f7"
+            android:gravity="bottom"
+            >
+
+        <LinearLayout
+                android:id="@+id/ll_logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/distance_15dp"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:gravity="center"
+                >
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_size_18sp"
+                    android:textColor="@color/base_red"
+                    android:text="@string/personal_exit"
+                    />
+        </LinearLayout>
+
+    </RelativeLayout>
 </LinearLayout>
