@@ -21,7 +21,7 @@ public class HttpUtil {
      * 拼接并返回完整的请求地址
      */
     public static String getAbsolteUrl(String relativeUrl) {
-        return ConstantUrl.INSTANCE.getBASE_URL() + relativeUrl;
+        return ConstantUrl.BASE_URL + relativeUrl;
     }
 
     /**

@@ -9,9 +9,9 @@ package com.wisdom
  * @change
  */
 object ConstantUrl {
-    val BASE_URL = "https://api.haximeishi.com/"//线上
-    val REGISTER_URL="customer/register"//注册
-    val GET_VALIDATE_CODE_URL="customer/getCaptcha"//获取验证码
-    val LOGIN_URL="customer/login"//登录
-    val RESET_PSW_URL="customer/modifyPassword"//修改密码
+    const val BASE_URL = "https://api.haximeishi.com/"//线上
+    const val REGISTER_URL = "customer/register"//注册
+    const val GET_VALIDATE_CODE_URL = "customer/getCaptcha"//获取验证码
+    const val LOGIN_URL = "customer/login"//登录
+    const val RESET_PSW_URL = "customer/modifyPassword"//修改密码
 }
