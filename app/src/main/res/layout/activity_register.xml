@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            >
+    >
 
         <RelativeLayout
                 android:layout_width="match_parent"
@@ -31,7 +31,7 @@
                     android:scaleType="fitXY"
                     android:layout_centerInParent="true"
                     android:src="@mipmap/ic_launcher"
-                    />
+            />
         </RelativeLayout>
 
         <RelativeLayout
@@ -48,7 +48,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/font_size_18sp"
                     android:text="@string/register_name"
-                    />
+            />
 
             <EditText
                     android:layout_width="match_parent"
@@ -59,7 +59,7 @@
                     android:background="@null"
                     android:layout_marginLeft="@dimen/distance_25dp"
                     android:layout_toRightOf="@+id/register_name_text"
-                    />
+            />
         </RelativeLayout>
 
         <LinearLayout
@@ -69,7 +69,7 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="@dimen/distance_10dp"
                 android:background="@color/gray"
-                />
+        />
 
         <RelativeLayout
                 android:paddingLeft="@dimen/distance_15dp"
@@ -85,7 +85,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/font_size_18sp"
                     android:text="@string/register_phone"
-                    />
+            />
 
             <EditText
                     android:layout_width="match_parent"
@@ -94,9 +94,10 @@
                     android:hint="@string/register_phone_hint"
                     android:id="@+id/register_phone"
                     android:background="@null"
+                    android:inputType="number"
                     android:layout_marginLeft="@dimen/distance_10dp"
                     android:layout_toRightOf="@+id/register_phone_text"
-                    />
+            />
         </RelativeLayout>
 
         <LinearLayout
@@ -106,7 +107,7 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="@dimen/distance_10dp"
                 android:background="@color/gray"
-                />
+        />
 
         <RelativeLayout
                 android:paddingLeft="@dimen/distance_15dp"
@@ -122,7 +123,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/font_size_18sp"
                     android:text="@string/register_psw"
-                    />
+            />
 
             <EditText
                     android:layout_width="match_parent"
@@ -133,7 +134,7 @@
                     android:background="@null"
                     android:layout_marginLeft="@dimen/distance_25dp"
                     android:layout_toRightOf="@+id/register_psw_text"
-                    />
+            />
         </RelativeLayout>
 
         <LinearLayout
@@ -143,7 +144,7 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="@dimen/distance_10dp"
                 android:background="@color/gray"
-                />
+        />
 
         <RelativeLayout
                 android:paddingLeft="@dimen/distance_15dp"
@@ -159,7 +160,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/font_size_18sp"
                     android:text="@string/register_invate_code"
-                    />
+            />
 
             <EditText
                     android:layout_width="match_parent"
@@ -170,7 +171,7 @@
                     android:background="@null"
                     android:layout_marginLeft="@dimen/distance_10dp"
                     android:layout_toRightOf="@+id/register_invate_text"
-                    />
+            />
         </RelativeLayout>
 
         <LinearLayout
@@ -180,7 +181,7 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="@dimen/distance_10dp"
                 android:background="@color/gray"
-                />
+        />
 
         <RelativeLayout
                 android:paddingLeft="@dimen/distance_15dp"
@@ -196,7 +197,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/font_size_18sp"
                     android:text="@string/register_code"
-                    />
+            />
 
             <EditText
                     android:layout_marginRight="@dimen/distance_10dp"
@@ -209,7 +210,7 @@
                     android:layout_toLeftOf="@+id/tv_get_code"
                     android:layout_marginLeft="@dimen/distance_10dp"
                     android:layout_toRightOf="@+id/register_code_text"
-                    />
+            />
 
             <com.wisdom.project.weight.CountDownButton
                     android:id="@+id/btn_get_code"
@@ -222,7 +223,7 @@
                     android:textStyle="bold"
                     android:layout_alignParentRight="true"
 
-                    />
+            />
         </RelativeLayout>
 
         <LinearLayout
@@ -232,14 +233,14 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="@dimen/distance_10dp"
                 android:background="@color/gray"
-                />
+        />
 
 
         <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/distance_25dp"
-                >
+        >
 
             <Button
                     android:id="@+id/btn_register"
@@ -252,7 +253,7 @@
                     android:layout_marginLeft="@dimen/distance_15dp"
                     android:layout_marginRight="@dimen/distance_15dp"
                     android:layout_centerInParent="true"
-                    />
+            />
 
 
         </RelativeLayout>
@@ -265,7 +266,7 @@
                 android:orientation="horizontal"
                 android:layout_below="@+id/btn_register"
                 android:layout_marginTop="@dimen/distance_8dp"
-                >
+        >
 
             <TextView
                     android:layout_width="wrap_content"
@@ -273,7 +274,7 @@
                     android:textSize="@dimen/font_size_16sp"
                     android:textColor="@color/textcolor"
                     android:text="点击“注册”表示您已经同意"
-                    />
+            />
 
             <TextView
                     android:layout_width="wrap_content"
@@ -281,7 +282,7 @@
                     android:textSize="@dimen/font_size_16sp"
                     android:textColor="@color/ff1f8fe4"
                     android:text="《用户协议》"
-                    />
+            />
         </LinearLayout>
 
         <LinearLayout
@@ -292,7 +293,7 @@
                 android:orientation="horizontal"
                 android:layout_below="@+id/btn_register"
                 android:layout_marginTop="@dimen/distance_8dp"
-                >
+        >
 
             <TextView
                     android:layout_width="wrap_content"
@@ -300,7 +301,7 @@
                     android:textSize="@dimen/font_size_16sp"
                     android:textColor="@color/textcolor"
                     android:text="已有账号？点击"
-                    />
+            />
 
             <TextView
                     android:layout_width="wrap_content"
@@ -308,7 +309,7 @@
                     android:textSize="@dimen/font_size_16sp"
                     android:textColor="@color/ff1f8fe4"
                     android:text="登录"
-                    />
+            />
         </LinearLayout>
     </LinearLayout>
 
