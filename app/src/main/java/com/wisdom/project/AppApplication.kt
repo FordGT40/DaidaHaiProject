@@ -76,7 +76,7 @@ class AppApplication : Application() {
                 .setConnectTimeout(OkGo.DEFAULT_MILLISECONDS.toLong())  //全局的连接超时时间
                 .setReadTimeOut(OkGo.DEFAULT_MILLISECONDS.toLong())     //全局的读取超时时间
                 .setWriteTimeOut(OkGo.DEFAULT_MILLISECONDS.toLong())    //全局的写入超时时间
-                .addCommonHeaders(headers)
+//                .addCommonHeaders(headers)
                 //可以全局统一设置缓存模式,默认是不使用缓存,可以不传,具体其他模式看 github 介绍 https://github.com/jeasonlzy/
                 .setCacheMode(CacheMode.DEFAULT)
 
