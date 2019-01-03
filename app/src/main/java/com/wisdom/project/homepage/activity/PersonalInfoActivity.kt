@@ -141,4 +141,15 @@ class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
             })
     }
 
+    /**
+     *  @describe  修改昵称
+     *  @return
+     *  @params [name]
+     *  @author hanxuefeng
+     *  @time 2019/1/3
+     */
+    private fun alterNickName(name:String){
+
+    }
+
 }

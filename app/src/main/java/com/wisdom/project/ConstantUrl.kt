@@ -16,4 +16,5 @@ object ConstantUrl {
     const val RESET_PSW_URL = "customer/modifyPassword"//修改密码
     const val GET_PERSONAL_INFO_URL = "customer/detail"//获得个人信息
     const val LOGOUT_URL = "customer/logout"//退出，注销
+    const val  ALTER_NICK_NAME= "customer/modifyNikeName"//修改昵称
 }
