@@ -1,7 +1,8 @@
 package com.wisdom.project.homepage.activity
 
-import android.app.Activity
 import android.content.Intent
+import android.os.Environment
+import android.util.Log
 import android.view.View
 import com.bumptech.glide.Glide
 import com.lzy.okgo.callback.StringCallback
@@ -9,8 +10,11 @@ import com.wisdom.ConstantString
 import com.wisdom.ConstantUrl
 import com.wisdom.project.R
 import com.wisdom.project.base.BaseActivity
+import com.wisdom.project.homepage.helper.PopWindowHelper
 import com.wisdom.project.homepage.model.PersonalInfoModel
 import com.wisdom.project.login.activity.LoginActivity
+import com.wisdom.project.util.FileUtils
+import com.wisdom.project.util.FileUtils.UTIL_FILE_SELECT_CODE
 import com.wisdom.project.util.SharedPreferenceUtil
 import com.wisdom.project.util.U
 import com.wisdom.project.util.http_util.HttpUtil
@@ -21,7 +25,6 @@ import okhttp3.Call
 import okhttp3.Response
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.startActivityForResult
 import org.jetbrains.anko.toast
 import org.json.JSONObject
 
@@ -34,13 +37,16 @@ import org.json.JSONObject
  * @change
  */
 class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
-
+    var mFilePath=""
+    // 指定路径
     override fun setlayoutIds() {
         setContentView(R.layout.activity_personal_info)
     }
 
     override fun initViews() {
         setTitle(R.string.personal_title)
+         mFilePath = Environment.getExternalStorageDirectory().getPath()// 获取SD卡路径
+        mFilePath = "$mFilePath/temp.png"
         rl_personal_info_head.setOnClickListener(this@PersonalInfoActivity)
         rl_personal_info_alter_name.setOnClickListener(this@PersonalInfoActivity)
         rl_personal_info_alter_active_code.setOnClickListener(this@PersonalInfoActivity)
@@ -59,6 +65,7 @@ class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
         when (v?.id) {
             R.id.rl_personal_info_head -> {
                 //修改头像
+                PopWindowHelper(this@PersonalInfoActivity).showUploadPop(this@PersonalInfoActivity)
             }
             R.id.rl_personal_info_alter_name -> {
                 //修改昵称
@@ -158,11 +165,53 @@ class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
      */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode== ConstantString.CODE_REFRESH) {
-            //刷新页面数据
-            getUserInfo()
+        when (requestCode) {
+            UTIL_FILE_SELECT_CODE -> {
+                if (data != null) {
+                    val uri = data.data
+                    val intent = Intent(Intent.ACTION_GET_CONTENT)
+                    intent.setDataAndType(uri, "*/*")
+                    intent.addCategory(Intent.CATEGORY_OPENABLE)
+                    this.startActivity(intent)
+                }
+            }
+            ConstantString.ALBUM_SELECT_CODE -> {//相册选择
+                if (resultCode == RESULT_OK) {
+                    if (data != null) {
+                        // Get the Uri of the selected file
+                        val uri = data.data
+                        val path = FileUtils.getPath(this, uri)
+                        if (mFilePath != "") {
+                            uploadFiles(path)
+                        }
+                    }
+                }
+
+            }
+            ConstantString.FILE_SELECT_CODE -> {//文件选择器选择
+                if (resultCode == RESULT_OK) {
+                    if (data != null) {
+                        // Get the Uri of the selected file
+                        val uri = data.data
+                        val path = FileUtils.getPath(this, uri)
+                        if (mFilePath != "") {
+                            uploadFiles(path)
+                        }
+                    }
+                }
+            }
+            ConstantString.REQUEST_CAMERA -> {//相机拍照选择
+                if (!ConstantString.PIC_LOCATE.equals("")) {
+                    uploadFiles(ConstantString.PIC_LOCATE)
+                }
+            }
+            else -> {//刷新数据
+                getUserInfo()
+
+            }
         }
 
     }
 
+    private fun uploadFiles(path:String){}
 }

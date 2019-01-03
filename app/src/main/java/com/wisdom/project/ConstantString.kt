@@ -31,4 +31,10 @@ object ConstantString {
      val FORM_NOTICE_OPEN = "fromNoticOpen"//
      val FORM_NOTICE_OPEN_DATA = "formNoticeOpenData"//
      val SP_USER_LOGIN_MODEL_KEY = "userLoginModel"
+
+    //调取相册相机文件方面的参数常量
+     val REQUEST_CAMERA = 101//调起相机
+    val ALBUM_SELECT_CODE = 102//调起相册
+    val FILE_SELECT_CODE = 103//调起文件选择
+    var PIC_LOCATE = ""//拍照后图片缓存的地址
 }
