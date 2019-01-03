@@ -94,7 +94,7 @@
                     android:hint="@string/register_phone_hint"
                     android:id="@+id/register_phone"
                     android:background="@null"
-                    android:inputType="number"
+                    android:inputType="phone"
                     android:layout_marginLeft="@dimen/distance_10dp"
                     android:layout_toRightOf="@+id/register_phone_text"
             />

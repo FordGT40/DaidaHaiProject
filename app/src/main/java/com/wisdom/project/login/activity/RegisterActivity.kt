@@ -105,6 +105,7 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
         )
         val strParams = Gson().toJson(loginSubmitClass)
         println(TAG + "strParams:" + strParams)
+//        val testParam="{\"nikeName\":\"茶话会\",\"captcha\":\"1234\",\"code\":\"hhhg\",\"mobile\":\"13155555555\",\"password\":\"vvvvvv\"}"
         //参数json拼接完毕，访问接口  "\""+strParams+"\""
         HttpUtil.httpPostWithoutBaseString(ConstantUrl.REGISTER_URL, strParams, object : StringCallback() {
             override fun onSuccess(t: String?, call: Call?, response: Response?) {

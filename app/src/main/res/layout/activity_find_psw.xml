@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="#f7f7f7"
+        android:layout_height="match_parent">
+
+    <include layout="@layout/head_title_bar"/>
+
+
+    <LinearLayout
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+        <RelativeLayout
+                android:paddingLeft="@dimen/distance_15dp"
+                android:paddingRight="@dimen/distance_15dp"
+                android:paddingTop="@dimen/distance_10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:id="@+id/find_psw_phone_text"
+                    android:textColor="@color/textcolor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_size_18sp"
+                    android:text="@string/find_psw_phone"
+                    />
+
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_size_18sp"
+                    android:hint="@string/find_psw_phone_hint"
+                    android:id="@+id/find_psw_phone"
+                    android:background="@null"
+                    android:inputType="phone"
+                    android:layout_marginLeft="@dimen/distance_10dp"
+                    android:layout_toRightOf="@+id/find_psw_phone_text"
+                    />
+        </RelativeLayout>
+
+        <LinearLayout
+                android:layout_marginLeft="@dimen/distance_10dp"
+                android:layout_marginRight="@dimen/distance_10dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/distance_10dp"
+                android:background="@color/gray"
+                />
+
+        <RelativeLayout
+                android:paddingLeft="@dimen/distance_15dp"
+                android:paddingRight="@dimen/distance_15dp"
+                android:paddingTop="@dimen/distance_10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:id="@+id/find_psw_new_psw_text"
+                    android:textColor="@color/textcolor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_size_18sp"
+                    android:text="@string/find_psw_new_psw"
+                    />
+
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_size_18sp"
+                    android:hint="@string/find_psw_new_psw_hint"
+                    android:id="@+id/find_psw_new_psw"
+                    android:background="@null"
+                    android:layout_marginLeft="@dimen/distance_10dp"
+                    android:layout_toRightOf="@+id/find_psw_new_psw_text"
+                    />
+        </RelativeLayout>
+
+        <LinearLayout
+                android:layout_marginLeft="@dimen/distance_10dp"
+                android:layout_marginRight="@dimen/distance_10dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/distance_10dp"
+                android:background="@color/gray"
+                />
+
+        <RelativeLayout
+                android:paddingLeft="@dimen/distance_15dp"
+                android:paddingRight="@dimen/distance_15dp"
+                android:paddingTop="@dimen/distance_10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:id="@+id/find_psw_validate_code_text"
+                    android:textColor="@color/textcolor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_size_18sp"
+                    android:text="@string/find_psw_validate_code"
+                    />
+
+            <EditText
+                    android:layout_marginRight="@dimen/distance_10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_size_18sp"
+                    android:hint="@string/find_psw_validate_code_hint"
+                    android:id="@+id/find_psw_validate_code"
+                    android:background="@null"
+                    android:layout_toLeftOf="@+id/tv_get_code"
+                    android:layout_marginLeft="@dimen/distance_10dp"
+                    android:layout_toRightOf="@+id/find_psw_validate_code_text"
+                    />
+
+            <com.wisdom.project.weight.CountDownButton
+                    android:id="@+id/btn_find_psw_get_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/distance_30dp"
+                    android:text="@string/find_psw_get_code"
+                    android:textColor="@color/base_red"
+                    android:textSize="@dimen/font_size_16sp"
+                    android:background="@color/translucent"
+                    android:textStyle="bold"
+                    android:layout_alignParentRight="true"
+
+                    />
+        </RelativeLayout>
+
+        <LinearLayout
+                android:layout_marginLeft="@dimen/distance_10dp"
+                android:layout_marginRight="@dimen/distance_10dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/distance_10dp"
+                android:background="@color/gray"
+                />
+
+
+
+
+    </LinearLayout>
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/distance_35dp"
+            >
+
+        <Button
+                android:id="@+id/btn_find_psw_confirm"
+                android:textSize="@dimen/font_size_20sp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/distance_40dp"
+                android:text="@string/find_psw_confirm"
+                android:background="@drawable/shape_btn_circle_corner_red"
+                android:textColor="@color/white"
+                android:layout_marginLeft="@dimen/distance_15dp"
+                android:layout_marginRight="@dimen/distance_15dp"
+                android:layout_centerInParent="true"
+                />
+
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -43,8 +43,9 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
     override fun initViews() {
         setTitle(R.string.login_title)
         head_back_iv.visibility = View.GONE
-        tv_login_fast_register.setOnClickListener(this)
-        iv_login_delete.setOnClickListener(this)
+        tv_login_fast_register.setOnClickListener(this@LoginActivity)
+        iv_login_delete.setOnClickListener(this@LoginActivity)
+        tv_login_find_psw.setOnClickListener(this@LoginActivity)
         btn_login.setOnClickListener(this@LoginActivity)
         //切换密码是否可见按钮点击事件
         cb_login_hide.setOnCheckedChangeListener { _, isChecked ->
@@ -77,6 +78,10 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                 if (validatePageDate()) {
                     login()
                 }
+            }
+            R.id.tv_login_find_psw -> {
+                //找回密码页面
+                startActivity<FindPswActivity>()
             }
         }
     }

@@ -37,4 +37,18 @@
     <string name="login_psw_hint">请输入6-18位密码</string>
     <string name="login_fast_register">快速注册</string>
     <string name="login_find_psw">找回密码</string>
+    <!--找回密码-->
+    <string name="find_psw_title">修改密码</string>
+    <string name="find_psw_phone">手机号</string>
+    <string name="find_psw_phone_hint">请输入您的手机号</string>
+    <string name="find_psw_phone_hint2">您输入的手机号有误，请重试</string>
+    <string name="find_psw_validate_code">验证码</string>
+    <string name="find_psw_validate_code_hint">请输入验证码</string>
+    <string name="find_psw_new_psw">新密码</string>
+    <string name="find_psw_new_psw_hint">请输入新密码</string>
+    <string name="find_psw_new_psw_hint2">密码为6-18位，请重试</string>
+    <string name="find_psw_get_code">获取验证码</string>
+    <string name="find_psw_confirm">确定</string>
+    <string name="find_psw_succeed">修改成功</string>
+    <string name="find_psw_fail">修改失败</string>
 </resources>

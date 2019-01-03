@@ -1,6 +1,5 @@
 package com.wisdom
 
-import android.annotation.SuppressLint
 import android.app.Application
 import android.app.NotificationManager
 import android.content.Context
@@ -16,8 +15,6 @@ import com.wisdom.project.R
 import com.wisdom.project.login.model.LoginModel
 import com.wisdom.project.util.SharedPreferenceUtil
 import com.wisdom.project.util.ToastUtil
-import okhttp3.internal.Internal
-import okhttp3.internal.Internal.instance
 import java.util.logging.Level
 
 /**
@@ -39,7 +36,6 @@ class AppApplication : Application() {
         super.onCreate()
         context = this
         ToastUtil.init(this)
-        headers.put("content-type", "application/octet-stream")
         OkGo.init(this)
         instance = this
         okgoInit()

@@ -125,7 +125,7 @@ public class HttpUtil {
         Log.i(TAG, "httpPostWithoutBaseString: " + params);
         OkGo.post(getAbsolteUrl(url))
                 .cacheMode(CacheMode.DEFAULT)
-                .upString(params)
+                .upJson(params)
                 .execute(callback);
     }
 //     .headers("Content-type", "application/json")
