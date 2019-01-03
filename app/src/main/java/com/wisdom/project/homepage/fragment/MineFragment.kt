@@ -60,10 +60,7 @@ class MineFragment : Fragment(), View.OnClickListener {
                 //检查版本更新
             }
             R.id.iv_login -> {
-                if (StrUtils.isBlank(
-                        SharedPreferenceUtil.getUserInfo(activity).token
-                    )
-                ) {
+                if (SharedPreferenceUtil.getUserInfo(activity)==null) {
                     //未登录状态
                     context?.startActivity(Intent(activity, LoginActivity::class.java))
                 } else {

@@ -163,6 +163,7 @@
             />
 
             <EditText
+                    android:inputType="number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/font_size_18sp"
@@ -244,9 +245,9 @@
 
             <Button
                     android:id="@+id/btn_register"
-                    android:textSize="@dimen/font_size_20sp"
+                    android:textSize="@dimen/font_size_18sp"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/distance_40dp"
+                    android:layout_height="@dimen/distance_35dp"
                     android:text="@string/register_title"
                     android:background="@drawable/shape_btn_circle_corner_red"
                     android:textColor="@color/white"

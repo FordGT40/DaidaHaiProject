@@ -1,8 +1,11 @@
 package com.wisdom.project.homepage.activity
 
+import android.app.Activity
+import android.content.Intent
 import android.view.View
 import com.bumptech.glide.Glide
 import com.lzy.okgo.callback.StringCallback
+import com.wisdom.ConstantString
 import com.wisdom.ConstantUrl
 import com.wisdom.project.R
 import com.wisdom.project.base.BaseActivity
@@ -18,6 +21,7 @@ import okhttp3.Call
 import okhttp3.Response
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.startActivityForResult
 import org.jetbrains.anko.toast
 import org.json.JSONObject
 
@@ -58,6 +62,10 @@ class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
             }
             R.id.rl_personal_info_alter_name -> {
                 //修改昵称
+                startActivityForResult(
+                    Intent(this@PersonalInfoActivity, AlterNickNameActivity::class.java)
+                    , ConstantString.CODE_REFRESH
+                )
             }
             R.id.rl_personal_info_alter_active_code -> {
                 //修改激活码
@@ -142,13 +150,18 @@ class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
     }
 
     /**
-     *  @describe  修改昵称
+     *  @describe 页面回调方法
      *  @return
-     *  @params [name]
+     *  @params
      *  @author hanxuefeng
      *  @time 2019/1/3
      */
-    private fun alterNickName(name:String){
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode== ConstantString.CODE_REFRESH) {
+            //刷新页面数据
+            getUserInfo()
+        }
 
     }
 

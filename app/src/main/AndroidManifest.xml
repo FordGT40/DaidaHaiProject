@@ -64,6 +64,12 @@
                 android:exported="true"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme"/>
+        <!--修改昵称-->
+        <activity
+                android:name=".homepage.activity.AlterNickNameActivity"
+                android:exported="true"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>

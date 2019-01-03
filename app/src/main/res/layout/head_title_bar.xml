@@ -62,5 +62,10 @@
         android:padding="10dp"
         android:src="@mipmap/arroww_left"
         android:visibility="gone" />
-
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#eeeeee"
+        android:layout_alignParentBottom="true"
+        />
 </RelativeLayout>

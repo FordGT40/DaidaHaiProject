@@ -141,6 +141,22 @@ public class HttpUtil {
                 .upJson(params)
                 .execute(callback);
     }
+    /**
+     * raw json方式提交数据
+     *
+     * @return a
+     * @describe a
+     * @author HanXueFeng
+     * @time 2019/1/2  17:33
+     */
+    public static void httpPostWithoutBaseStringWithToken(String url, String params, String token,StringCallback callback) {
+        Log.i(TAG, "httpPostWithoutBaseString: " + params);
+        OkGo.post(getAbsolteUrl(url))
+                .cacheMode(CacheMode.DEFAULT)
+                .upJson(params)
+                .headers("token",token)
+                .execute(callback);
+    }
 //     .headers("Content-type", "application/json")
 //                .headers("Content-type", "text/json")
 //                .headers("Content-type", "text/javascript")

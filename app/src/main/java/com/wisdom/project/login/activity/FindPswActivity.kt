@@ -14,6 +14,8 @@ import com.wisdom.project.util.http_util.HttpUtil
 import kotlinx.android.synthetic.main.activity_find_psw.*
 import okhttp3.Call
 import okhttp3.Response
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import org.json.JSONObject
 
@@ -150,7 +152,14 @@ class FindPswActivity : BaseActivity(), View.OnClickListener {
                 if (!StrUtils.isBlank(t)) {
                     val jsonObject = JSONObject(t)
                     if (jsonObject.getInt("code") == 200) {
-                        toast(R.string.find_psw_succeed)
+                     alert {
+                         title("提示")
+                         message("密码修改成功，请使用新密码重新登录系统")
+                         positiveButton("确定"){
+                             startActivity<LoginActivity>()
+                             this@FindPswActivity.finish()
+                         }
+                     }.show()
                     } else {
                         toast(jsonObject.getString("msg"))
                     }

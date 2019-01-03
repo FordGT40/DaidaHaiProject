@@ -7,10 +7,6 @@
 
     <include layout="@layout/head_title_bar"/>
 
-    <!--<ScrollView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent">-->
-
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -148,9 +144,9 @@
 
             <Button
                     android:id="@+id/btn_login"
-                    android:textSize="@dimen/font_size_20sp"
+                    android:textSize="@dimen/font_size_18sp"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/distance_40dp"
+                    android:layout_height="@dimen/distance_35dp"
                     android:text="@string/login_title"
                     android:background="@drawable/shape_btn_circle_corner_red"
                     android:textColor="@color/white"
@@ -208,7 +204,7 @@
 
     </LinearLayout>
 
-    <!--</ScrollView>-->
+
 
 
 </LinearLayout>

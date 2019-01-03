@@ -104,6 +104,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                         ConstantString.SP_USER_LOGIN_MODEL_KEY, t!!.data
                     )
                     toast(R.string.login_succeed)
+                    this@LoginActivity.finish()
                 } else {
                     toast(R.string.login_fail)
                 }
