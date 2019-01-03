@@ -147,7 +147,7 @@ public abstract class JsonCallback<T> extends AbsCallback<T> {
         int error_code = 3;
         try {
             JSONObject jsonObject = new JSONObject(data);
-            error_code = jsonObject.getInt("error_code");
+            error_code = jsonObject.getInt("code");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -164,7 +164,7 @@ public abstract class JsonCallback<T> extends AbsCallback<T> {
         String error_msg = "";
         try {
             JSONObject jsonObject = new JSONObject(data);
-            error_msg = jsonObject.getString("error_msg");
+            error_msg = jsonObject.getString("msg");
         } catch (JSONException e) {
             e.printStackTrace();
         }

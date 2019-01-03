@@ -29,5 +29,5 @@ object ConstantString {
     val CALL_TO_ACTIVITY = "callToActivity"//
     val FORM_NOTICE_OPEN = "fromNoticOpen"//
     val FORM_NOTICE_OPEN_DATA = "formNoticeOpenData"//
-
+val SP_USER_LOGIN_MODEL_KEY="userLoginModel"
 }

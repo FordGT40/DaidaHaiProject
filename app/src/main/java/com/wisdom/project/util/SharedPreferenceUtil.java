@@ -2,7 +2,7 @@ package com.wisdom.project.util;
 
 import android.content.Context;
 import com.wisdom.ConstantString;
-import com.wisdom.project.login.model.LoginModel;
+import com.wisdom.project.login.model.LoginBackModel;
 
 /**
  * @author HanXueFeng
@@ -28,10 +28,9 @@ public class SharedPreferenceUtil {
      * @param context
      * @return
      */
-    public static LoginModel getUserInfo(Context context) {
-        return ((LoginModel) getConfig(context).getSerializable(ConstantString.INSTANCE.getUSER_INFO()));
+    public static LoginBackModel getUserInfo(Context context) {
+        return ((LoginBackModel) getConfig(context).getSerializable(ConstantString.INSTANCE.getSP_USER_LOGIN_MODEL_KEY()));
     }
-
 
 
 }

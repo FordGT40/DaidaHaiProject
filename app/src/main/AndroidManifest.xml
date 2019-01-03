@@ -45,18 +45,13 @@
                 android:launchMode="singleTask"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme"/>
-        <!--首页-->
-        <!--<activity-->
-        <!--android:name=".homepage.activity.HomePageActivity"-->
-        <!--android:exported="true"-->
-        <!--android:screenOrientation="portrait"-->
-        <!--android:theme="@style/AppTheme"/>-->
         <!--注册-->
         <activity
                 android:name=".login.activity.RegisterActivity"
                 android:exported="true"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme"/>
+        
     </application>
 
 </manifest>

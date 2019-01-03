@@ -7,6 +7,7 @@ import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.HttpParams;
 import com.wisdom.ConstantUrl;
 import com.wisdom.project.util.http_util.callback.JsonCallback;
+import okhttp3.MediaType;
 
 
 /**
@@ -14,6 +15,8 @@ import com.wisdom.project.util.http_util.callback.JsonCallback;
  */
 
 public class HttpUtil {
+    public static final String TAG = HttpUtil.class.getSimpleName();
+
     /**
      * 拼接并返回完整的请求地址
      */
@@ -119,10 +122,16 @@ public class HttpUtil {
      * @time 2019/1/2  17:33
      */
     public static void httpPostWithoutBaseString(String url, String params, StringCallback callback) {
+        Log.i(TAG, "httpPostWithoutBaseString: " + params);
         OkGo.post(getAbsolteUrl(url))
                 .cacheMode(CacheMode.DEFAULT)
-                .upJson(params)
-                .headers("Content-type", "application/json")
+                .upString(params)
                 .execute(callback);
     }
+//     .headers("Content-type", "application/json")
+//                .headers("Content-type", "text/json")
+//                .headers("Content-type", "text/javascript")
+//                .headers("Content-type", "text/plain")
+//                .headers("Content-type", "application/xml")
+//                .headers("Content-type", "text/html")
 }
