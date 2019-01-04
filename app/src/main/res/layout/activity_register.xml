@@ -223,7 +223,6 @@
                     android:background="@color/translucent"
                     android:textStyle="bold"
                     android:layout_alignParentRight="true"
-
             />
         </RelativeLayout>
 
