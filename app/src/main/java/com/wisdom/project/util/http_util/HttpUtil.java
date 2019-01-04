@@ -54,6 +54,7 @@ public class HttpUtil {
                 .headers("token", token)
                 .execute(callback);
     }
+
     public static void httpGetWithToken(String url, HttpParams params, String token, StringCallback callback) {
         OkGo.get(getAbsolteUrl(url))
                 .cacheMode(CacheMode.DEFAULT)
@@ -61,6 +62,7 @@ public class HttpUtil {
                 .headers("token", token)
                 .execute(callback);
     }
+
     /**
      * HttpGet方法访问接口
      */
@@ -96,6 +98,15 @@ public class HttpUtil {
                 .execute(callback);
     }
 
+    public static void httpPostWithMultipart(String url, HttpParams params, String token, StringCallback callback) {
+        OkGo.post(getAbsolteUrl(url))
+                .cacheMode(CacheMode.DEFAULT)
+                .params(params)
+                .headers("token", token)
+                .isMultipart(true)
+                .execute(callback);
+    }
+
     /**
      * 上传文件的相关方法
      *
@@ -107,6 +118,25 @@ public class HttpUtil {
         OkGo.post(getAbsolteUrl(url))
                 .params(params)
                 .isMultipart(true)
+                .cacheMode(CacheMode.DEFAULT)
+                .execute(callback);
+    }
+
+
+    /**
+     * 上传文件的相关方法
+     *
+     * @param url
+     * @param params
+     * @param callback
+     */
+    public static void uploadFiles(String url, HttpParams params, String token, StringCallback callback) {
+        OkGo.post(getAbsolteUrl(url))
+                .params(params)
+                .isMultipart(true)
+                .headers("token", token)
+                .headers("Content-Type", "multipart/form-data")
+                .headers("Content-Type", "boundary=fha")
                 .cacheMode(CacheMode.DEFAULT)
                 .execute(callback);
     }
@@ -141,6 +171,7 @@ public class HttpUtil {
                 .upJson(params)
                 .execute(callback);
     }
+
     /**
      * raw json方式提交数据
      *
@@ -149,12 +180,12 @@ public class HttpUtil {
      * @author HanXueFeng
      * @time 2019/1/2  17:33
      */
-    public static void httpPostWithoutBaseStringWithToken(String url, String params, String token,StringCallback callback) {
+    public static void httpPostWithoutBaseStringWithToken(String url, String params, String token, StringCallback callback) {
         Log.i(TAG, "httpPostWithoutBaseString: " + params);
         OkGo.post(getAbsolteUrl(url))
                 .cacheMode(CacheMode.DEFAULT)
                 .upJson(params)
-                .headers("token",token)
+                .headers("token", token)
                 .execute(callback);
     }
 //     .headers("Content-type", "application/json")

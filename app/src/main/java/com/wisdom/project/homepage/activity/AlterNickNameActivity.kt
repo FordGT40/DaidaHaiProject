@@ -40,7 +40,7 @@ class AlterNickNameActivity : BaseActivity(), View.OnClickListener {
     private fun alterNickName(name: String) {
         val param=Gson().toJson(NickNameModel(name)).toString()
         HttpUtil.httpPostWithoutBaseStringWithToken(
-            ConstantUrl.ALTER_NICK_NAME, param
+            ConstantUrl.ALTER_NICK_NAME_URL, param
             , SharedPreferenceUtil.getUserInfo(this@AlterNickNameActivity).token,
             object : StringCallback() {
                 override fun onSuccess(t: String?, call: Call?, response: Response?) {

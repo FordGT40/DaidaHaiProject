@@ -1,11 +1,17 @@
 package com.wisdom.project.homepage.activity
 
+import android.Manifest
+import android.app.ProgressDialog
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Environment
-import android.util.Log
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
 import android.view.View
 import com.bumptech.glide.Glide
 import com.lzy.okgo.callback.StringCallback
+import com.lzy.okgo.model.HttpParams
+import com.lzy.okgo.request.BaseRequest
 import com.wisdom.ConstantString
 import com.wisdom.ConstantUrl
 import com.wisdom.project.R
@@ -24,9 +30,11 @@ import kotlinx.android.synthetic.main.activity_personal_info.*
 import okhttp3.Call
 import okhttp3.Response
 import org.jetbrains.anko.alert
+import org.jetbrains.anko.progressDialog
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import org.json.JSONObject
+import java.io.File
 
 /**
  * @ProjectName project： DaidaHaiProject
@@ -37,7 +45,8 @@ import org.json.JSONObject
  * @change
  */
 class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
-    var mFilePath=""
+    var mFilePath = ""
+    lateinit var progressShow: ProgressDialog
     // 指定路径
     override fun setlayoutIds() {
         setContentView(R.layout.activity_personal_info)
@@ -45,14 +54,20 @@ class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
 
     override fun initViews() {
         setTitle(R.string.personal_title)
-         mFilePath = Environment.getExternalStorageDirectory().getPath()// 获取SD卡路径
+        mFilePath = Environment.getExternalStorageDirectory().getPath()// 获取SD卡路径
         mFilePath = "$mFilePath/temp.png"
         rl_personal_info_head.setOnClickListener(this@PersonalInfoActivity)
         rl_personal_info_alter_name.setOnClickListener(this@PersonalInfoActivity)
         rl_personal_info_alter_active_code.setOnClickListener(this@PersonalInfoActivity)
         rl_personal_info_alter_sex.setOnClickListener(this@PersonalInfoActivity)
         ll_logout.setOnClickListener(this@PersonalInfoActivity)
-        getUserInfo()
+        //判断用户是否登陆过
+        if (SharedPreferenceUtil.getUserInfo(this@PersonalInfoActivity) != null) {
+            getUserInfo()
+        } else {
+            toast("请先登录")
+            startActivity<LoginActivity>()
+        }
     }
 
     /**
@@ -73,6 +88,22 @@ class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
                     Intent(this@PersonalInfoActivity, AlterNickNameActivity::class.java)
                     , ConstantString.CODE_REFRESH
                 )
+                //用户授权
+                if (ContextCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.CAMERA
+                    ) != PackageManager.PERMISSION_GRANTED
+                ) run {
+                    ActivityCompat.requestPermissions(
+                        this,
+                        arrayOf(
+                            Manifest.permission.CAMERA,
+                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE
+                        ),
+                        1
+                    )
+                }
             }
             R.id.rl_personal_info_alter_active_code -> {
                 //修改激活码
@@ -165,6 +196,7 @@ class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
      */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        println("data:${data?.data}")
         when (requestCode) {
             UTIL_FILE_SELECT_CODE -> {
                 if (data != null) {
@@ -180,7 +212,9 @@ class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
                     if (data != null) {
                         // Get the Uri of the selected file
                         val uri = data.data
-                        val path = FileUtils.getPath(this, uri)
+                        val path = FileUtils.getPathByUri4kitkat(this, uri)
+                       println("***uri***:${data.data}")
+                       println("***path***:$path")
                         if (mFilePath != "") {
                             uploadFiles(path)
                         }
@@ -193,7 +227,7 @@ class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
                     if (data != null) {
                         // Get the Uri of the selected file
                         val uri = data.data
-                        val path = FileUtils.getPath(this, uri)
+                        val path = FileUtils.getPathByUri4kitkat(this, uri)
                         if (mFilePath != "") {
                             uploadFiles(path)
                         }
@@ -213,5 +247,44 @@ class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
 
     }
 
-    private fun uploadFiles(path:String){}
+    /**
+     *  @describe 上传文件的方法
+     *  @return
+     *  @author HanXueFeng
+     *  @time 2019/1/4  9:04
+     */
+    private fun uploadFiles(path: String) {
+        val parameter = HttpParams()
+        progressShow = progressDialog(title = "提示", message = "正在上传……")
+        parameter.put("file", File(path))
+        HttpUtil.uploadFiles(ConstantUrl.UPLOAD_FILE_URL, parameter
+            , SharedPreferenceUtil.getUserInfo(this@PersonalInfoActivity).token
+            , object : StringCallback() {
+                override fun onBefore(request: BaseRequest<out BaseRequest<*>>?) {
+                    super.onBefore(request)
+                    progressShow.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL)
+                    progressShow.setCancelable(false)
+                    progressShow.setCanceledOnTouchOutside(false)
+                    progressShow.show()
+                }
+
+                override fun upProgress(currentSize: Long, totalSize: Long, progress: Float, networkSpeed: Long) {
+                    super.upProgress(currentSize, totalSize, progress, networkSpeed)
+                    progressShow.max = 100
+                    progressShow.progress = (progress * 100).toInt()
+                }
+
+                override fun onError(call: Call?, response: Response?, e: java.lang.Exception?) {
+                    super.onError(call, response, e)
+                    print("错误是:${e?.message}")
+                    print("错误是:${e?.toString()}")
+                    progressShow?.dismiss()
+                }
+
+                override fun onSuccess(t: String?, call: Call?, response: Response?) {
+                    progressShow?.dismiss()
+                    getUserInfo()
+                }
+            })
+    }
 }

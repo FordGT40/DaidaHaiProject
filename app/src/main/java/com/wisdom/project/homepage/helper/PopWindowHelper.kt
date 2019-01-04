@@ -1,10 +1,9 @@
 package com.wisdom.project.homepage.helper
 
+
 import android.Manifest
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.drawable.ColorDrawable
@@ -22,14 +21,10 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.PopupWindow
-
-import com.lzy.okgo.model.HttpParams
 import com.wisdom.ConstantString
 import com.wisdom.ConstantString.REQUEST_CAMERA
 import com.wisdom.project.R
 import com.wisdom.project.util.ToastUtil
-
-
 import java.io.File
 
 
@@ -127,7 +122,7 @@ class PopWindowHelper(private val context: Context) : View.OnClickListener {
                 }
                 val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    val contentUri = FileProvider.getUriForFile(context, "com.wisdom.hrbzwt.myprovider", outputFile)
+                    val contentUri = FileProvider.getUriForFile(context, "com.wisdom.project.myprovider", outputFile)
                     intent.putExtra(MediaStore.EXTRA_OUTPUT, contentUri)
                 } else {
                     val photoUri = Uri.fromFile(outputFile) // 传递路径
