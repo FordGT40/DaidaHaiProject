@@ -12,6 +12,7 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.view.View
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.gson.Gson
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.HttpParams
@@ -155,7 +156,9 @@ class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
                         tv_personal_phone.text = t.data.mobile
                         tv_personal_sex.text = t.data.gender
                         Glide.with(this@PersonalInfoActivity)
-                            .load(t.data.image).into(iv_head)
+                            .load(t.data.image)
+                            .apply(RequestOptions.circleCropTransform())
+                            .into(iv_head)
                     } else {
                         toast(t.msg)
                     }
@@ -294,7 +297,9 @@ class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
                     val dataObject = JSONObject(t).getJSONObject("data")
                     Glide.with(this@PersonalInfoActivity)
                         .load(dataObject.getString("image"))
+                        .apply(RequestOptions.circleCropTransform())
                         .into(iv_head)
+
                     getUserInfo()
                 }
             })
