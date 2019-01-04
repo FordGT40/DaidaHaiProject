@@ -18,4 +18,5 @@ object ConstantUrl {
     const val LOGOUT_URL = "customer/logout"//退出，注销
     const val ALTER_NICK_NAME_URL = "customer/modifyNikeName"//修改昵称
     const val UPLOAD_FILE_URL = "customer/upload"//上传文件
+    const val ALTER_SEX_URL = "customer/modifyGender"//修改性别
 }

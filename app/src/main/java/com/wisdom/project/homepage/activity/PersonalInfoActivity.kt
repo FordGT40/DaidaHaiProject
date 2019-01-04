@@ -2,13 +2,17 @@ package com.wisdom.project.homepage.activity
 
 import android.Manifest
 import android.app.ProgressDialog
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Environment
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.view.View
 import com.bumptech.glide.Glide
+import com.google.gson.Gson
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.HttpParams
 import com.lzy.okgo.request.BaseRequest
@@ -17,6 +21,7 @@ import com.wisdom.ConstantUrl
 import com.wisdom.project.R
 import com.wisdom.project.base.BaseActivity
 import com.wisdom.project.homepage.helper.PopWindowHelper
+import com.wisdom.project.homepage.model.GenderModel
 import com.wisdom.project.homepage.model.PersonalInfoModel
 import com.wisdom.project.login.activity.LoginActivity
 import com.wisdom.project.util.FileUtils
@@ -47,6 +52,7 @@ import java.io.File
 class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
     var mFilePath = ""
     lateinit var progressShow: ProgressDialog
+
     // 指定路径
     override fun setlayoutIds() {
         setContentView(R.layout.activity_personal_info)
@@ -68,6 +74,8 @@ class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
             toast("请先登录")
             startActivity<LoginActivity>()
         }
+        //注册修改性别的广播接收者
+        registerReceiver(AlterSexReceiver(), IntentFilter(ConstantString.BROAD_CAST_ALTER_SEX))
     }
 
     /**
@@ -79,15 +87,6 @@ class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.rl_personal_info_head -> {
-                //修改头像
-                PopWindowHelper(this@PersonalInfoActivity).showUploadPop(this@PersonalInfoActivity)
-            }
-            R.id.rl_personal_info_alter_name -> {
-                //修改昵称
-                startActivityForResult(
-                    Intent(this@PersonalInfoActivity, AlterNickNameActivity::class.java)
-                    , ConstantString.CODE_REFRESH
-                )
                 //用户授权
                 if (ContextCompat.checkSelfPermission(
                         this,
@@ -104,12 +103,23 @@ class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
                         1
                     )
                 }
+                //修改头像
+                PopWindowHelper(this@PersonalInfoActivity).showUploadPop(this@PersonalInfoActivity)
+            }
+            R.id.rl_personal_info_alter_name -> {
+                //修改昵称
+                startActivityForResult(
+                    Intent(this@PersonalInfoActivity, AlterNickNameActivity::class.java)
+                    , ConstantString.CODE_REFRESH
+                )
+
             }
             R.id.rl_personal_info_alter_active_code -> {
                 //修改激活码
             }
             R.id.rl_personal_info_alter_sex -> {
                 //修改性别
+                PopWindowHelper(this@PersonalInfoActivity).showAlterSexPop(this, this)
             }
             R.id.ll_logout -> {
                 //退出登录
@@ -213,8 +223,8 @@ class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
                         // Get the Uri of the selected file
                         val uri = data.data
                         val path = FileUtils.getPathByUri4kitkat(this, uri)
-                       println("***uri***:${data.data}")
-                       println("***path***:$path")
+                        println("***uri***:${data.data}")
+                        println("***path***:$path")
                         if (mFilePath != "") {
                             uploadFiles(path)
                         }
@@ -284,5 +294,46 @@ class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
                     getUserInfo()
                 }
             })
+    }
+
+
+    /**
+     *  @describe  修改昵称
+     *  @return
+     *  @params [name]
+     *  @author hanxuefeng
+     *  @time 2019/1/3
+     */
+    private fun alterSex(gender: String) {
+        val param = Gson().toJson(GenderModel(gender)).toString()
+        HttpUtil.httpPostWithoutBaseStringWithToken(
+            ConstantUrl.ALTER_SEX_URL, param
+            , SharedPreferenceUtil.getUserInfo(this@PersonalInfoActivity).token,
+            object : StringCallback() {
+                override fun onSuccess(t: String?, call: Call?, response: Response?) {
+                    val jsonObject = JSONObject(t)
+                    if (jsonObject.getInt("code") == 200) {
+                        toast(R.string.personal_alter_success)
+                        getUserInfo()
+                    } else {
+                        toast(jsonObject.getString("msg"))
+                    }
+                }
+            }
+        )
+    }
+
+    /**
+     *  @describe 接收更改性别的广播接收器
+     *  @return
+     *  @author HanXueFeng
+     *  @time 2019/1/4  11:19
+     */
+    private inner class AlterSexReceiver : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            //接到广播更改性别信息
+            val sex = intent.getStringExtra("sex")
+            alterSex(sex)
+        }
     }
 }

@@ -15,6 +15,7 @@ object ConstantString {
     val CODE_NO_FILE = 20013
     val CODE_NO_DATA = 30001
     val CODE_REFRESH = 0x123
+    val BROAD_CAST_ALTER_SEX = "broad_cast_alter_sex"
     val FILE_NO_CONTENT_CODE = "20402"
     //本地存储sp文件的名称
      val SHARE_PER_INFO = "nahe_oa_sp"//本地sp文件的存储名称

@@ -24,11 +24,18 @@ import android.widget.PopupWindow
 import com.wisdom.ConstantString
 import com.wisdom.ConstantString.REQUEST_CAMERA
 import com.wisdom.project.R
+import com.wisdom.project.base.BroadCastManager
 import com.wisdom.project.util.ToastUtil
 import java.io.File
 
 
 class PopWindowHelper(private val context: Context) : View.OnClickListener {
+    lateinit var activity: Activity
+
+    companion object {
+        private var window: PopupWindow? = null
+        private var window2: PopupWindow? = null
+    }
 
     /**
      * 弹出选择上传方式菜单
@@ -149,12 +156,67 @@ class PopWindowHelper(private val context: Context) : View.OnClickListener {
                 }
 
             }
+            R.id.ll_sex_man -> {
+                //选择性别为男
+                val broadcastIntent = Intent()
+                broadcastIntent.action = ConstantString.BROAD_CAST_ALTER_SEX
+                broadcastIntent.putExtra("sex", "男")
+                BroadCastManager.getInstance().sendBroadCast(activity, broadcastIntent)
+                window2?.dismiss()
+            }
+            R.id.ll_sex_woman -> {
+                //选择性别为女
+                val broadcastIntent = Intent()
+                broadcastIntent.action = ConstantString.BROAD_CAST_ALTER_SEX
+                broadcastIntent.putExtra("sex", "女")
+                BroadCastManager.getInstance().sendBroadCast(activity, broadcastIntent)
+                window2?.dismiss()
+            }
         }
     }
 
-    companion object {
-        private var window: PopupWindow? = null
-    }
+    /**
+     * 弹出选择上传方式菜单
+     *
+     * @param context
+     */
+    fun showAlterSexPop(context: Context, activity: Activity) {
+        this@PopWindowHelper.activity = activity
+        val lp = (context as Activity).window.attributes
+        lp.alpha = java.lang.Float.parseFloat("0.5") //0.0-1.0
+        context.window.attributes = lp
+        // 一个自定义的布局，作为显示的内容
+        val view = LayoutInflater.from(context).inflate(
+            R.layout.pop_alter_sex, null
+        )
+        val ll_sex_man = view.findViewById<View>(R.id.ll_sex_man) as LinearLayout
+        val ll_sex_woman = view.findViewById<View>(R.id.ll_sex_woman) as LinearLayout
+        val ll_cancel = view.findViewById<View>(R.id.ll_cancel) as LinearLayout
+        ll_cancel.setOnClickListener(this)
+        ll_sex_woman.setOnClickListener(this)
+        ll_sex_man.setOnClickListener(this)
+        window2 = PopupWindow(
+            view,
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+        window2!!.setBackgroundDrawable(ColorDrawable(-0x1))
+        // 设置popWindow弹出窗体可点击，这句话必须添加，并且是true
+        window2!!.isFocusable = true
+        // 设置popWindow的显示和消失动画
+        window2!!.animationStyle = R.style.mypopwindow_anim_style
+        // 在底部显示
+        window2!!.showAtLocation(
+            context.findViewById(R.id.ll_logout),
+            Gravity.BOTTOM, 0, 0
+        )
+        //popWindow消失监听方法
+        window2!!.setOnDismissListener {
+            val lp = context.window.attributes
+            lp.alpha = 1f //0.0-1.0
+            context.window.attributes = lp
+        }
 
+    }
 
 }
