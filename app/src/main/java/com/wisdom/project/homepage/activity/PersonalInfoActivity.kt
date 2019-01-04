@@ -153,7 +153,6 @@ class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
                         //获取个人信息成功,将信息填充至界面
                         tv_personal_name.text = t.data.nikeName
                         tv_personal_phone.text = t.data.mobile
-                        tv_personal_phone.text = t.data.mobile
                         tv_personal_sex.text = t.data.gender
                         Glide.with(this@PersonalInfoActivity)
                             .load(t.data.image)

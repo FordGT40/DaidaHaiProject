@@ -10,6 +10,8 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.lzy.okgo.OkGo
 import com.lzy.okgo.cache.CacheMode
 import com.lzy.okgo.callback.FileCallback
@@ -20,12 +22,15 @@ import com.wisdom.ConstantUrl
 import com.wisdom.project.R
 import com.wisdom.project.homepage.activity.AlterActiveCodeActivity
 import com.wisdom.project.homepage.activity.PersonalInfoActivity
+import com.wisdom.project.homepage.model.PersonalInfoModel
 import com.wisdom.project.login.activity.FindPswActivity
 import com.wisdom.project.login.activity.LoginActivity
 import com.wisdom.project.util.SharedPreferenceUtil
 import com.wisdom.project.util.U
 import com.wisdom.project.util.VersionUtil
 import com.wisdom.project.util.http_util.HttpUtil
+import com.wisdom.project.util.http_util.callback.BaseModel
+import com.wisdom.project.util.http_util.callback.JsonCallback
 import kotlinx.android.synthetic.main.fragment_mine.*
 import okhttp3.Call
 import okhttp3.Response
@@ -56,7 +61,18 @@ class MineFragment : Fragment(), View.OnClickListener {
         rl_mine_alter_active_code.setOnClickListener(this@MineFragment)
         rl_mine_check_update.setOnClickListener(this@MineFragment)
         iv_login.setOnClickListener(this@MineFragment)
+        tv_mine_login.setOnClickListener(this@MineFragment)
+    }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (SharedPreferenceUtil.getUserInfo(context) == null) {
+//            没有登陆过
+            context!!.startActivity(Intent(context, LoginActivity::class.java))
+        } else {
+            //之前登陆过，但是并不知道token是否过期
+            getUserInfo()
+        }
     }
 
 
@@ -86,6 +102,7 @@ class MineFragment : Fragment(), View.OnClickListener {
                 //检查版本更新
                 checkVersion()
             }
+            R.id.tv_mine_login,
             R.id.iv_login -> {
                 if (SharedPreferenceUtil.getUserInfo(activity) == null) {
                     //未登录状态
@@ -188,5 +205,37 @@ class MineFragment : Fragment(), View.OnClickListener {
             })
     }
 
+    /**
+     *  @describe 获取个人信息接口
+     *  @return
+     *  @author HanXueFeng
+     *  @time 2019/1/3  16:43
+     */
+    private fun getUserInfo() {
+        U.showLoadingDialog(activity)
+        HttpUtil.httpGetWithToken(ConstantUrl.GET_PERSONAL_INFO_URL, null
+            , SharedPreferenceUtil.getUserInfo(context).token,
+            object : JsonCallback<BaseModel<PersonalInfoModel>>() {
+                override fun onError(call: Call?, response: Response?, e: Exception?) {
+                    super.onError(call, response, e)
+                    U.closeLoadingDialog()
+                }
 
+                override fun onSuccess(t: BaseModel<PersonalInfoModel>?, call: Call?, response: Response?) {
+                    if (t!!.code == 200) {
+                        U.closeLoadingDialog()
+                        //获取个人信息成功,将信息填充至界面
+                        tv_mine_login.text = t.data.nikeName
+                        Glide.with(context!!)
+                            .load(t.data.image)
+                            .apply(RequestOptions.circleCropTransform())
+                            .into(iv_mine_head_img)
+                    } else {
+                        context!!.toast(t.msg)
+                    }
+                }
+            }
+
+        )
+    }
 }
