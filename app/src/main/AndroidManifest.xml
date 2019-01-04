@@ -43,7 +43,6 @@
         <activity
                 android:name="com.wisdom.project.login.activity.LoginActivity"
                 android:exported="true"
-                android:launchMode="singleTask"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme"/>
         <!--注册-->

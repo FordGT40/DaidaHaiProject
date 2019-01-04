@@ -276,8 +276,6 @@ class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
 
                 override fun onError(call: Call?, response: Response?, e: java.lang.Exception?) {
                     super.onError(call, response, e)
-                    print("错误是:${e?.message}")
-                    print("错误是:${e?.toString()}")
                     progressShow?.dismiss()
                 }
 
