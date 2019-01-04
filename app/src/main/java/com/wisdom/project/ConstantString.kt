@@ -16,9 +16,11 @@ object ConstantString {
     val CODE_NO_DATA = 30001
     val CODE_REFRESH = 0x123
     val BROAD_CAST_ALTER_SEX = "broad_cast_alter_sex"
+    val REFRESH_PAGE_DATA = "refresh_page_data"
+    val REFRESH_LOGOUT_DATA = "refresh_logout_data"
     val FILE_NO_CONTENT_CODE = "20402"
     //本地存储sp文件的名称
-     val SHARE_PER_INFO = "nahe_oa_sp"//本地sp文件的存储名称
+     val SHARE_PER_INFO = "daidahai_sp"//本地sp文件的存储名称
     //sp文件存储用户名
      val USER_NAME = "userName"
     //sp文件存储密码

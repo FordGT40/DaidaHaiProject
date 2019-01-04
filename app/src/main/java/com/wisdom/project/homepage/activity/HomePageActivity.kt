@@ -32,8 +32,8 @@ class HomePageActivity : BaseActivity() {
     //Tab 图片
     private val TAB_IMGS = intArrayOf(
         R.drawable.ic_tab_homepage_selector,
-        R.drawable.ic_tab_msg_selector,
-        R.drawable.ic_tab_addressbook_selecter,
+        R.drawable.ic_tab_nine_point_nine_selector,
+        R.drawable.ic_tab_type_selector,
         R.drawable.ic_tab_mine_selector
     )
     //Fragment 数组

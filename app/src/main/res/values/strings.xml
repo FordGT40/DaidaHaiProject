@@ -57,7 +57,7 @@
     <string name="mine_personal_info">个人信息</string>
     <string name="mine_alter_psw">修改密码</string>
     <string name="mine_alter_active_code">修改激活码</string>
-    <string name="mine_check_update">检查更新</string>
+    <string name="mine_check_update">检查版本</string>
     <!--个人信息-->
     <string name="personal_title">个人信息</string>
     <string name="personal_head_img">头像</string>

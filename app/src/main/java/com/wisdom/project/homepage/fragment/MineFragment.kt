@@ -1,7 +1,10 @@
 package com.wisdom.project.homepage.fragment
 
 import android.app.ProgressDialog
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
@@ -18,8 +21,10 @@ import com.lzy.okgo.callback.FileCallback
 import com.lzy.okgo.callback.StringCallback
 import com.lzy.okgo.model.HttpParams
 import com.lzy.okgo.request.BaseRequest
+import com.wisdom.ConstantString
 import com.wisdom.ConstantUrl
 import com.wisdom.project.R
+import com.wisdom.project.base.BroadCastManager
 import com.wisdom.project.homepage.activity.AlterActiveCodeActivity
 import com.wisdom.project.homepage.activity.PersonalInfoActivity
 import com.wisdom.project.homepage.model.PersonalInfoModel
@@ -36,6 +41,7 @@ import okhttp3.Call
 import okhttp3.Response
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.progressDialog
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import org.json.JSONObject
 import java.io.File
@@ -50,6 +56,9 @@ import java.io.File
  */
 class MineFragment : Fragment(), View.OnClickListener {
     lateinit var progressDialog: ProgressDialog
+    private val refreshDataReceiver = RefreshDataReceiver()
+    private val logoutDataReceiver = LogoutDataReceiver()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_mine, null, false)
     }
@@ -62,16 +71,34 @@ class MineFragment : Fragment(), View.OnClickListener {
         rl_mine_check_update.setOnClickListener(this@MineFragment)
         iv_login.setOnClickListener(this@MineFragment)
         tv_mine_login.setOnClickListener(this@MineFragment)
+
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (SharedPreferenceUtil.getUserInfo(context) == null) {
-//            没有登陆过
-            context!!.startActivity(Intent(context, LoginActivity::class.java))
-        } else {
-            //之前登陆过，但是并不知道token是否过期
-            getUserInfo()
+    /**
+     *  @describe 当用户可见时候刷新界面
+     *  @return
+     *  @author HanXueFeng
+     *  @time 2019/1/4  17:13
+     */
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        //注册刷新数据的广播接收者
+        activity?.registerReceiver(refreshDataReceiver, IntentFilter(ConstantString.REFRESH_PAGE_DATA))
+        //注册刷新退出登录的广播接收者
+        activity?.registerReceiver(refreshDataReceiver, IntentFilter(ConstantString.REFRESH_LOGOUT_DATA))
+        if (isVisibleToUser) {
+            if (context?.getSharedPreferences(ConstantString.SHARE_PER_INFO, 0) != null) {
+                if (SharedPreferenceUtil.getUserInfo(context) == null) {
+                    //没有登陆过
+                    context?.startActivity(Intent(context, LoginActivity::class.java))
+                } else {
+                    //之前登陆过，但是并不知道token是否过期
+                    getUserInfo()
+                }
+            } else {
+//                没有登陆过
+                context?.startActivity(Intent(context, LoginActivity::class.java))
+            }
         }
     }
 
@@ -85,8 +112,12 @@ class MineFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.rl_mine_personal_info -> {
-                //个人信息
-                context?.startActivity(Intent(activity, PersonalInfoActivity::class.java))
+                //个人信息(未登录直接跳登录页)
+                if (SharedPreferenceUtil.getUserInfo(context) != null) {
+                    context?.startActivity(Intent(activity, PersonalInfoActivity::class.java))
+                } else {
+                    context?.startActivity<LoginActivity>()
+                }
             }
             R.id.rl_mine_alter_psw -> {
                 //修改密码
@@ -237,5 +268,38 @@ class MineFragment : Fragment(), View.OnClickListener {
             }
 
         )
+    }
+
+    /**
+     *  @describe 接收刷新界面的广播接收器
+     *  @return
+     *  @author HanXueFeng
+     *  @time 2019/1/4  11:19
+     */
+    private inner class RefreshDataReceiver : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            //接到广播 刷新界面数据
+            getUserInfo()
+        }
+    }
+
+    /**
+     *  @describe 接收退出登录的广播接收器
+     *  @return
+     *  @author HanXueFeng
+     *  @time 2019/1/4  11:19
+     */
+    private inner class LogoutDataReceiver : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            //接到广播  退出登录成功  刷新界面数据
+            tv_mine_login.text = context?.resources.getString(R.string.mine_hint)
+            iv_mine_head_img.setImageResource(R.drawable.touxiang)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        BroadCastManager.getInstance().unregisterReceiver(activity, refreshDataReceiver)
+        BroadCastManager.getInstance().unregisterReceiver(activity, logoutDataReceiver)
     }
 }

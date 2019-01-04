@@ -26,14 +26,15 @@
                     android:adjustViewBounds="true"
                     android:scaleType="fitXY"
                     android:layout_centerInParent="true"
-                    android:src="@mipmap/ic_launcher"
+                    android:src="@drawable/tubiao"
                     />
         </RelativeLayout>
 
         <RelativeLayout
+                android:layout_marginTop="@dimen/distance_15dp"
                 android:paddingLeft="@dimen/distance_15dp"
                 android:paddingRight="@dimen/distance_15dp"
-                android:paddingTop="@dimen/distance_10dp"
+                android:paddingTop="@dimen/distance_15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -62,20 +63,21 @@
                     />
 
             <ImageView
+                    android:layout_marginTop="@dimen/distance_5dp"
                     android:id="@+id/iv_login_delete"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
-                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/distance_10dp"
                     android:layout_alignParentRight="true"
                     android:scaleType="fitXY"
-                    android:src="@mipmap/ic_launcher"
+                    android:src="@drawable/quxiao"
                     />
         </RelativeLayout>
 
         <LinearLayout
-                android:layout_marginLeft="@dimen/distance_10dp"
-                android:layout_marginRight="@dimen/distance_10dp"
+                android:layout_marginLeft="@dimen/distance_15dp"
+                android:layout_marginRight="@dimen/distance_15dp"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="@dimen/distance_10dp"
@@ -85,7 +87,7 @@
         <RelativeLayout
                 android:paddingLeft="@dimen/distance_15dp"
                 android:paddingRight="@dimen/distance_15dp"
-                android:paddingTop="@dimen/distance_10dp"
+                android:paddingTop="@dimen/distance_15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -115,23 +117,24 @@
 
             <CheckBox
                     android:id="@+id/cb_login_hide"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
+                    android:layout_marginTop="@dimen/distance_20dp"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
-                    android:button="@mipmap/ic_launcher"
+                    android:layout_marginRight="@dimen/distance_10dp"
+                    android:button="@drawable/cb_eye_selector"
                     />
 
 
         </RelativeLayout>
 
         <LinearLayout
-                android:layout_marginLeft="@dimen/distance_10dp"
-                android:layout_marginRight="@dimen/distance_10dp"
+                android:layout_marginLeft="@dimen/distance_15dp"
+                android:layout_marginRight="@dimen/distance_15dp"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="@dimen/distance_10dp"
                 android:background="@color/gray"
                 />
 
@@ -203,8 +206,6 @@
         </LinearLayout>
 
     </LinearLayout>
-
-
 
 
 </LinearLayout>

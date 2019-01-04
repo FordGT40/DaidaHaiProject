@@ -1,11 +1,13 @@
 package com.wisdom.project.login.activity
 
+import android.content.Intent
 import android.view.View
 import com.lzy.okgo.model.HttpParams
 import com.wisdom.ConstantString
 import com.wisdom.ConstantUrl
 import com.wisdom.project.R
 import com.wisdom.project.base.BaseActivity
+import com.wisdom.project.base.BroadCastManager
 import com.wisdom.project.login.model.LoginBackModel
 import com.wisdom.project.util.RegularUtil
 import com.wisdom.project.util.SharedPreferenceUtil
@@ -104,6 +106,10 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                         ConstantString.SP_USER_LOGIN_MODEL_KEY, t!!.data
                     )
                     toast(R.string.login_succeed)
+                    //发送广播，刷新界面
+                    val broadcastIntent = Intent()
+                    broadcastIntent.action = ConstantString.REFRESH_PAGE_DATA
+                    BroadCastManager.getInstance().sendBroadCast(this@LoginActivity, broadcastIntent)
                     this@LoginActivity.finish()
                 } else {
                     toast(R.string.login_fail)

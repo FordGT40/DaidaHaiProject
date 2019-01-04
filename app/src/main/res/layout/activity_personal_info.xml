@@ -35,13 +35,13 @@
 
             <ImageView
                     android:id="@+id/iv_head"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
                     android:adjustViewBounds="true"
                     android:scaleType="fitXY"
-                    android:src="@mipmap/ic_launcher"
+                    android:src="@drawable/touxiang"
                     android:layout_marginRight="50dp"
                     />
 
@@ -54,7 +54,7 @@
                     android:adjustViewBounds="true"
                     android:layout_marginRight="@dimen/distance_15dp"
                     android:scaleType="fitXY"
-                    android:src="@mipmap/arrow"
+                    android:src="@drawable/gengduo"
                     />
 
         </RelativeLayout>
@@ -103,7 +103,7 @@
                     android:adjustViewBounds="true"
                     android:layout_marginRight="@dimen/distance_15dp"
                     android:scaleType="fitXY"
-                    android:src="@mipmap/arrow"
+                    android:src="@drawable/gengduo"
                     />
 
         </RelativeLayout>
@@ -154,7 +154,7 @@
                     android:adjustViewBounds="true"
                     android:layout_marginRight="@dimen/distance_15dp"
                     android:scaleType="fitXY"
-                    android:src="@mipmap/arrow"
+                    android:src="@drawable/gengduo"
                     />
 
         </RelativeLayout>
@@ -203,7 +203,7 @@
                     android:adjustViewBounds="true"
                     android:layout_marginRight="@dimen/distance_15dp"
                     android:scaleType="fitXY"
-                    android:src="@mipmap/arrow"
+                    android:src="@drawable/gengduo"
                     />
 
         </RelativeLayout>

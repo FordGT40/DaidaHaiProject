@@ -21,6 +21,7 @@ import com.wisdom.ConstantString
 import com.wisdom.ConstantUrl
 import com.wisdom.project.R
 import com.wisdom.project.base.BaseActivity
+import com.wisdom.project.base.BroadCastManager
 import com.wisdom.project.homepage.helper.PopWindowHelper
 import com.wisdom.project.homepage.model.GenderModel
 import com.wisdom.project.homepage.model.PersonalInfoModel
@@ -54,6 +55,7 @@ import java.io.File
 class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
     var mFilePath = ""
     lateinit var progressShow: ProgressDialog
+    private val alterSexReceiver = AlterSexReceiver()
 
     // 指定路径
     override fun setlayoutIds() {
@@ -76,7 +78,7 @@ class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
             startActivity<LoginActivity>()
         }
         //注册修改性别的广播接收者
-        registerReceiver(AlterSexReceiver(), IntentFilter(ConstantString.BROAD_CAST_ALTER_SEX))
+        registerReceiver(alterSexReceiver, IntentFilter(ConstantString.BROAD_CAST_ALTER_SEX))
     }
 
     /**
@@ -187,7 +189,14 @@ class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
                     val jsonObject = JSONObject(t)
                     if (jsonObject.getInt("code") == 200) {
                         toast("退出成功！")
+                        SharedPreferenceUtil.getConfig(this@PersonalInfoActivity).putSerializable(
+                            ConstantString.SP_USER_LOGIN_MODEL_KEY, null
+                        )
                         startActivity<LoginActivity>()
+                        //发送退出广播，更新界面显示
+                        val broadcastIntent = Intent()
+                        broadcastIntent.action = ConstantString.REFRESH_LOGOUT_DATA
+                        BroadCastManager.getInstance().sendBroadCast(this@PersonalInfoActivity, broadcastIntent)
                         finish()
                     } else {
                         toast(jsonObject.getString("msg"))
@@ -345,5 +354,9 @@ class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        BroadCastManager.getInstance().unregisterReceiver(this, alterSexReceiver)
+    }
 
 }
