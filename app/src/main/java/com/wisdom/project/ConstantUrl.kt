@@ -19,4 +19,5 @@ object ConstantUrl {
     const val ALTER_NICK_NAME_URL = "customer/modifyNikeName"//修改昵称
     const val UPLOAD_FILE_URL = "customer/upload"//上传文件
     const val ALTER_SEX_URL = "customer/modifyGender"//修改性别
+    const val ALTER_ACTIVE_CODE = "customer/modifyCode"//修改激活码
 }

@@ -70,4 +70,7 @@
     <string name="personal_fail">获取个人信息失败</string>
     <string name="personal_confirm">确定</string>
     <string name="personal_alter_success">修改成功</string>
+    <string name="personal_alter_active_code">修改激活码</string>
+    <string name="personal_active_code">激活码</string>
+    <string name="personal_active_code_hint">请填写新的激活码</string>
 </resources>

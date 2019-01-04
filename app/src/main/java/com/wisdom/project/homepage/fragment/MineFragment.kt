@@ -7,11 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.wisdom.project.R
+import com.wisdom.project.R.id.rl_personal_info_alter_active_code
+import com.wisdom.project.homepage.activity.AlterActiveCodeActivity
 import com.wisdom.project.homepage.activity.PersonalInfoActivity
 import com.wisdom.project.login.activity.FindPswActivity
 import com.wisdom.project.login.activity.LoginActivity
 import com.wisdom.project.util.SharedPreferenceUtil
-import com.wisdom.project.util.StrUtils
 import kotlinx.android.synthetic.main.fragment_mine.*
 
 /**
@@ -55,12 +56,15 @@ class MineFragment : Fragment(), View.OnClickListener {
             }
             R.id.rl_mine_alter_active_code -> {
                 //修改激活码
+                startActivity(
+                    Intent(activity, AlterActiveCodeActivity::class.java)
+                )
             }
             R.id.rl_mine_check_update -> {
                 //检查版本更新
             }
             R.id.iv_login -> {
-                if (SharedPreferenceUtil.getUserInfo(activity)==null) {
+                if (SharedPreferenceUtil.getUserInfo(activity) == null) {
                     //未登录状态
                     context?.startActivity(Intent(activity, LoginActivity::class.java))
                 } else {

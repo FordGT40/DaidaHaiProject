@@ -69,6 +69,12 @@
                 android:exported="true"
                 android:screenOrientation="portrait"
                 android:theme="@style/AppTheme"/>
+        <!--修改激活码-->
+        <activity
+                android:name=".homepage.activity.AlterActiveCodeActivity"
+                android:exported="true"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme"/>
         <!--适配相册的provider-->
         <provider
                 android:name="android.support.v4.content.FileProvider"
@@ -77,7 +83,7 @@
                 android:grantUriPermissions="true">
             <meta-data
                     android:name="android.support.FILE_PROVIDER_PATHS"
-                    android:resource="@xml/provider_xml" />
+                    android:resource="@xml/provider_xml"/>
         </provider>
     </application>
 

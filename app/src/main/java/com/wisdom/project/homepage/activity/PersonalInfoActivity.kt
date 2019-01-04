@@ -64,7 +64,6 @@ class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
         mFilePath = "$mFilePath/temp.png"
         rl_personal_info_head.setOnClickListener(this@PersonalInfoActivity)
         rl_personal_info_alter_name.setOnClickListener(this@PersonalInfoActivity)
-        rl_personal_info_alter_active_code.setOnClickListener(this@PersonalInfoActivity)
         rl_personal_info_alter_sex.setOnClickListener(this@PersonalInfoActivity)
         ll_logout.setOnClickListener(this@PersonalInfoActivity)
         //判断用户是否登陆过
@@ -113,9 +112,6 @@ class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
                     , ConstantString.CODE_REFRESH
                 )
 
-            }
-            R.id.rl_personal_info_alter_active_code -> {
-                //修改激活码
             }
             R.id.rl_personal_info_alter_sex -> {
                 //修改性别
