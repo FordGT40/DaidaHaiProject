@@ -24,6 +24,7 @@ import com.wisdom.project.homepage.helper.PopWindowHelper
 import com.wisdom.project.homepage.model.GenderModel
 import com.wisdom.project.homepage.model.PersonalInfoModel
 import com.wisdom.project.login.activity.LoginActivity
+import com.wisdom.project.util.BitmapUtil
 import com.wisdom.project.util.FileUtils
 import com.wisdom.project.util.FileUtils.UTIL_FILE_SELECT_CODE
 import com.wisdom.project.util.SharedPreferenceUtil
@@ -262,7 +263,9 @@ class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
     private fun uploadFiles(path: String) {
         val parameter = HttpParams()
         progressShow = progressDialog(title = "提示", message = "正在上传……")
-        parameter.put("file", File(path))
+        //压缩图片
+        val afterPressureurl = BitmapUtil.compressImage(path)
+        parameter.put("file", File(afterPressureurl))
         HttpUtil.uploadFiles(ConstantUrl.UPLOAD_FILE_URL, parameter
             , SharedPreferenceUtil.getUserInfo(this@PersonalInfoActivity).token
             , object : StringCallback() {
@@ -287,11 +290,15 @@ class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
 
                 override fun onSuccess(t: String?, call: Call?, response: Response?) {
                     progressShow?.dismiss()
+                    toast("上传成功！")
+                    val dataObject = JSONObject(t).getJSONObject("data")
+                    Glide.with(this@PersonalInfoActivity)
+                        .load(dataObject.getString("image"))
+                        .into(iv_head)
                     getUserInfo()
                 }
             })
     }
-
 
 
     /**
