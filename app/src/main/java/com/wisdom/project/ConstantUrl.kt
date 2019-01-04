@@ -20,4 +20,6 @@ object ConstantUrl {
     const val UPLOAD_FILE_URL = "customer/upload"//上传文件
     const val ALTER_SEX_URL = "customer/modifyGender"//修改性别
     const val ALTER_ACTIVE_CODE = "customer/modifyCode"//修改激活码
+    const val CHECK_VERSION = "app/checkVersion"//检查版本更新
+
 }

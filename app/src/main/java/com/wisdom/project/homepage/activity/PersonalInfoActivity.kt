@@ -293,6 +293,7 @@ class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
     }
 
 
+
     /**
      *  @describe  修改昵称
      *  @return
@@ -332,4 +333,6 @@ class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
             alterSex(sex)
         }
     }
+
+
 }
