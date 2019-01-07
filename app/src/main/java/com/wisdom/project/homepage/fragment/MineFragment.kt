@@ -262,7 +262,7 @@ class MineFragment : Fragment(), View.OnClickListener {
                         if (t!!.code == 200) {
                             U.closeLoadingDialog()
                             //获取个人信息成功,将信息填充至界面
-                            tv_mine_login.text = t.data.nikeName
+                            tv_mine_login?.text = t.data.nikeName
                             Glide.with(context!!)
                                 .load(t.data.image)
                                 .apply(RequestOptions.circleCropTransform())
@@ -285,8 +285,9 @@ class MineFragment : Fragment(), View.OnClickListener {
      */
     private inner class RefreshDataReceiver : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
-            //接到广播 刷新界面数据
-            getUserInfo()
+            if (isVisible) {//接到广播 刷新界面数据
+                getUserInfo()
+            }
         }
     }
 
