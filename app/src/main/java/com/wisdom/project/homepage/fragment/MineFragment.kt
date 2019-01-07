@@ -83,9 +83,9 @@ class MineFragment : Fragment(), View.OnClickListener {
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
         //注册刷新数据的广播接收者
-        activity?.registerReceiver(refreshDataReceiver, IntentFilter(ConstantString.REFRESH_PAGE_DATA))
+        activity?.registerReceiver(refreshDataReceiver, IntentFilter(ConstantString.BROAD_CAST_REFRESH_PAGE_DATA))
         //注册刷新退出登录的广播接收者
-        activity?.registerReceiver(refreshDataReceiver, IntentFilter(ConstantString.REFRESH_LOGOUT_DATA))
+        activity?.registerReceiver(refreshDataReceiver, IntentFilter(ConstantString.BROAD_CAST_REFRESH_LOGOUT_DATA))
         if (isVisibleToUser) {
             if (context?.getSharedPreferences(ConstantString.SHARE_PER_INFO, 0) != null) {
                 if (SharedPreferenceUtil.getUserInfo(context) == null) {
@@ -244,30 +244,32 @@ class MineFragment : Fragment(), View.OnClickListener {
      */
     private fun getUserInfo() {
         U.showLoadingDialog(activity)
-        HttpUtil.httpGetWithToken(ConstantUrl.GET_PERSONAL_INFO_URL, null
-            , SharedPreferenceUtil.getUserInfo(context).token,
-            object : JsonCallback<BaseModel<PersonalInfoModel>>() {
-                override fun onError(call: Call?, response: Response?, e: Exception?) {
-                    super.onError(call, response, e)
-                    U.closeLoadingDialog()
-                }
-
-                override fun onSuccess(t: BaseModel<PersonalInfoModel>?, call: Call?, response: Response?) {
-                    if (t!!.code == 200) {
+        if (SharedPreferenceUtil.getConfig(context) != null) {
+            HttpUtil.httpGetWithToken(ConstantUrl.GET_PERSONAL_INFO_URL, null
+                , SharedPreferenceUtil.getUserInfo(context).token,
+                object : JsonCallback<BaseModel<PersonalInfoModel>>() {
+                    override fun onError(call: Call?, response: Response?, e: Exception?) {
+                        super.onError(call, response, e)
                         U.closeLoadingDialog()
-                        //获取个人信息成功,将信息填充至界面
-                        tv_mine_login.text = t.data.nikeName
-                        Glide.with(context!!)
-                            .load(t.data.image)
-                            .apply(RequestOptions.circleCropTransform())
-                            .into(iv_mine_head_img)
-                    } else {
-                        context!!.toast(t.msg)
+                    }
+
+                    override fun onSuccess(t: BaseModel<PersonalInfoModel>?, call: Call?, response: Response?) {
+                        if (t!!.code == 200) {
+                            U.closeLoadingDialog()
+                            //获取个人信息成功,将信息填充至界面
+                            tv_mine_login.text = t.data.nikeName
+                            Glide.with(context!!)
+                                .load(t.data.image)
+                                .apply(RequestOptions.circleCropTransform())
+                                .into(iv_mine_head_img)
+                        } else {
+                            context!!.toast(t.msg)
+                        }
                     }
                 }
-            }
 
-        )
+            )
+        }
     }
 
     /**
@@ -299,7 +301,19 @@ class MineFragment : Fragment(), View.OnClickListener {
 
     override fun onDestroy() {
         super.onDestroy()
-        BroadCastManager.getInstance().unregisterReceiver(activity, refreshDataReceiver)
-        BroadCastManager.getInstance().unregisterReceiver(activity, logoutDataReceiver)
+        val refreshIntent = Intent()
+        val logoutIntent = Intent()
+        refreshIntent.action = ConstantString.BROAD_CAST_REFRESH_PAGE_DATA
+        logoutIntent.action = ConstantString.BROAD_CAST_REFRESH_LOGOUT_DATA
+        val pm = activity?.packageManager
+        val resolveInfosRefresh = pm?.queryBroadcastReceivers(refreshIntent, 0)
+        val resolveInfosLogout = pm?.queryBroadcastReceivers(logoutIntent, 0)
+        //在解绑广播之前，判断广播是否被注册，否则会空指针
+        if (resolveInfosRefresh != null && !resolveInfosRefresh.isEmpty()) {
+            BroadCastManager.getInstance().unregisterReceiver(activity, refreshDataReceiver)
+        }
+        if (resolveInfosLogout != null && !resolveInfosLogout.isEmpty()) {
+            BroadCastManager.getInstance().unregisterReceiver(activity, logoutDataReceiver)
+        }
     }
 }

@@ -195,7 +195,7 @@ class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
                         startActivity<LoginActivity>()
                         //发送退出广播，更新界面显示
                         val broadcastIntent = Intent()
-                        broadcastIntent.action = ConstantString.REFRESH_LOGOUT_DATA
+                        broadcastIntent.action = ConstantString.BROAD_CAST_REFRESH_LOGOUT_DATA
                         BroadCastManager.getInstance().sendBroadCast(this@PersonalInfoActivity, broadcastIntent)
                         finish()
                     } else {

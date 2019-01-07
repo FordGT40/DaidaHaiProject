@@ -108,7 +108,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                     toast(R.string.login_succeed)
                     //发送广播，刷新界面
                     val broadcastIntent = Intent()
-                    broadcastIntent.action = ConstantString.REFRESH_PAGE_DATA
+                    broadcastIntent.action = ConstantString.BROAD_CAST_REFRESH_PAGE_DATA
                     BroadCastManager.getInstance().sendBroadCast(this@LoginActivity, broadcastIntent)
                     this@LoginActivity.finish()
                 } else {
