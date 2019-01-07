@@ -70,7 +70,8 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             R.id.tv_login_fast_register -> {
                 //快速注册按钮点击事件
                 startActivity<RegisterActivity>()
-            }
+                this.finish()
+        }
             R.id.iv_login_delete -> {
                 //账号后清空按钮点击事件
                 login_accout.setText("")
@@ -84,6 +85,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
             R.id.tv_login_find_psw -> {
                 //找回密码页面
                 startActivity<FindPswActivity>()
+                this.finish()
             }
         }
     }

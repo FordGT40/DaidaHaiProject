@@ -114,6 +114,8 @@ class RegisterActivity : BaseActivity(), View.OnClickListener {
                     val jsonObject = JSONObject(t)
                     if (jsonObject.getInt("code") == 200) {
                         toast(R.string.register_succeed)
+                        this@RegisterActivity.finish()
+                        startActivity<LoginActivity>()
                     } else {
                         toast(jsonObject.getString("msg"))
                     }

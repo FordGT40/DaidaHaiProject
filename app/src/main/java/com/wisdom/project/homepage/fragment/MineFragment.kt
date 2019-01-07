@@ -74,6 +74,14 @@ class MineFragment : Fragment(), View.OnClickListener {
 
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        //注册刷新数据的广播接收者
+        activity?.registerReceiver(refreshDataReceiver, IntentFilter(ConstantString.BROAD_CAST_REFRESH_PAGE_DATA))
+        //注册刷新退出登录的广播接收者
+        activity?.registerReceiver(logoutDataReceiver, IntentFilter(ConstantString.BROAD_CAST_REFRESH_LOGOUT_DATA))
+    }
+
     /**
      *  @describe 当用户可见时候刷新界面
      *  @return
@@ -82,10 +90,7 @@ class MineFragment : Fragment(), View.OnClickListener {
      */
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        //注册刷新数据的广播接收者
-        activity?.registerReceiver(refreshDataReceiver, IntentFilter(ConstantString.BROAD_CAST_REFRESH_PAGE_DATA))
-        //注册刷新退出登录的广播接收者
-        activity?.registerReceiver(refreshDataReceiver, IntentFilter(ConstantString.BROAD_CAST_REFRESH_LOGOUT_DATA))
+
         if (isVisibleToUser) {
             if (context?.getSharedPreferences(ConstantString.SHARE_PER_INFO, 0) != null) {
                 if (SharedPreferenceUtil.getUserInfo(context) == null) {
@@ -244,7 +249,7 @@ class MineFragment : Fragment(), View.OnClickListener {
      */
     private fun getUserInfo() {
         U.showLoadingDialog(activity)
-        if (SharedPreferenceUtil.getConfig(context) != null) {
+        if (SharedPreferenceUtil.getUserInfo(context) != null) {
             HttpUtil.httpGetWithToken(ConstantUrl.GET_PERSONAL_INFO_URL, null
                 , SharedPreferenceUtil.getUserInfo(context).token,
                 object : JsonCallback<BaseModel<PersonalInfoModel>>() {
@@ -299,6 +304,12 @@ class MineFragment : Fragment(), View.OnClickListener {
         }
     }
 
+    /**
+     *  @describe 销毁页面解绑广播
+     *  @return
+     *  @author HanXueFeng
+     *  @time 2019/1/7  9:00
+     */
     override fun onDestroy() {
         super.onDestroy()
         val refreshIntent = Intent()
