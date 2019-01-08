@@ -58,7 +58,7 @@ class MineFragment : Fragment(), View.OnClickListener {
     lateinit var progressDialog: ProgressDialog
     private val refreshDataReceiver = RefreshDataReceiver()
     private val logoutDataReceiver = LogoutDataReceiver()
-
+    private var  isUserVisable:Boolean = false
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_mine, null, false)
     }
@@ -92,6 +92,7 @@ class MineFragment : Fragment(), View.OnClickListener {
         super.setUserVisibleHint(isVisibleToUser)
 
         if (isVisibleToUser) {
+            isUserVisable=isVisibleToUser
             if (context?.getSharedPreferences(ConstantString.SHARE_PER_INFO, 0) != null) {
                 if (SharedPreferenceUtil.getUserInfo(context) == null) {
                     //没有登陆过
@@ -248,7 +249,9 @@ class MineFragment : Fragment(), View.OnClickListener {
      *  @time 2019/1/3  16:43
      */
     private fun getUserInfo() {
-        U.showLoadingDialog(activity)
+        if (isUserVisable) {
+            U.showLoadingDialog(activity)
+        }
         if (SharedPreferenceUtil.getUserInfo(context) != null) {
             HttpUtil.httpGetWithToken(ConstantUrl.GET_PERSONAL_INFO_URL, null
                 , SharedPreferenceUtil.getUserInfo(context).token,

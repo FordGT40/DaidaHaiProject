@@ -27,9 +27,18 @@ class HomepageFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_homepage, null, false)
     }
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        U.showLoadingDialog(context)
+//        U.showLoadingDialog(context)
+        webView.webViewClient = object : WebViewClient() {
+            override fun onPageFinished(view: WebView?, url: String?) {
+                super.onPageFinished(view, url)
+                //页面加载结束
+                U.closeLoadingDialog()
+            }
+        }
         val webSettings = webView?.settings
         webSettings?.domStorageEnabled = true
         webSettings?.setSupportZoom(true) //支持缩放，默认为true。是下面那个的前提。
@@ -42,13 +51,7 @@ class HomepageFragment : Fragment() {
         webSettings?.cacheMode = WebSettings.LOAD_DEFAULT
         webSettings?.javaScriptEnabled = true//允许网页使用js
         webSettings?.javaScriptCanOpenWindowsAutomatically = true
-        webView.webViewClient = object : WebViewClient() {
-            override fun onPageFinished(view: WebView?, url: String?) {
-                super.onPageFinished(view, url)
-                //页面加载结束
-                U.closeLoadingDialog()
-            }
-        }
+
         if (SharedPreferenceUtil.getUserInfo(context) != null) {
             val url = SharedPreferenceUtil.getUserInfo(context).homeUrl
             webView.loadUrl(url)

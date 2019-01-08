@@ -200,8 +200,6 @@ class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
                         broadcastIntent.action = ConstantString.BROAD_CAST_REFRESH_LOGOUT_DATA
                         BroadCastManager.getInstance().sendBroadCast(this@PersonalInfoActivity, broadcastIntent)
                         ActivityManager.getActivityManagerInstance().clearAllActivity()
-//                        startActivity<LoginActivity>()
-
                         finish()
                     } else {
                         toast(jsonObject.getString("msg"))

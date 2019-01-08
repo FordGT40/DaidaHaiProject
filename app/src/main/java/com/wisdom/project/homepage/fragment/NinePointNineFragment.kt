@@ -30,7 +30,6 @@ class NinePointNineFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        U.showLoadingDialog(context)
         val webSettings = webView?.settings
         webSettings?.domStorageEnabled = true
         webSettings?.setSupportZoom(true) //支持缩放，默认为true。是下面那个的前提。
@@ -56,6 +55,13 @@ class NinePointNineFragment : Fragment() {
         } else {
             U.closeLoadingDialog()
             context?.toast("获取信息失败，请重试")
+        }
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if(isVisibleToUser){
+//            U.showLoadingDialog(context)
         }
     }
 

@@ -27,9 +27,15 @@ class TypeClassFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_type_class, null, false)
     }
 
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if(isVisibleToUser){
+//            U.showLoadingDialog(context)
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        U.showLoadingDialog(context)
         val webSettings = webView?.settings
         webSettings?.domStorageEnabled = true
         webSettings?.setSupportZoom(true) //支持缩放，默认为true。是下面那个的前提。
