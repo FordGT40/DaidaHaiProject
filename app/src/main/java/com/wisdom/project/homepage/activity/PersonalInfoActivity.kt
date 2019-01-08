@@ -20,6 +20,7 @@ import com.lzy.okgo.request.BaseRequest
 import com.wisdom.ConstantString
 import com.wisdom.ConstantUrl
 import com.wisdom.project.R
+import com.wisdom.project.base.ActivityManager
 import com.wisdom.project.base.BaseActivity
 import com.wisdom.project.base.BroadCastManager
 import com.wisdom.project.homepage.helper.PopWindowHelper
@@ -32,6 +33,7 @@ import com.wisdom.project.util.FileUtils.UTIL_FILE_SELECT_CODE
 import com.wisdom.project.util.SharedPreferenceUtil
 import com.wisdom.project.util.U
 import com.wisdom.project.util.http_util.HttpUtil
+import com.wisdom.project.util.http_util.HttpUtil.httpGetWithToken
 import com.wisdom.project.util.http_util.callback.BaseModel
 import com.wisdom.project.util.http_util.callback.JsonCallback
 import kotlinx.android.synthetic.main.activity_personal_info.*
@@ -141,7 +143,7 @@ class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
      */
     private fun getUserInfo() {
         U.showLoadingDialog(this@PersonalInfoActivity)
-        HttpUtil.httpGetWithToken(ConstantUrl.GET_PERSONAL_INFO_URL, null
+        httpGetWithToken(ConstantUrl.GET_PERSONAL_INFO_URL, null
             , SharedPreferenceUtil.getUserInfo(this@PersonalInfoActivity).token,
             object : JsonCallback<BaseModel<PersonalInfoModel>>() {
                 override fun onError(call: Call?, response: Response?, e: Exception?) {
@@ -177,7 +179,7 @@ class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
      */
     private fun logout() {
         U.showLoadingDialog(this@PersonalInfoActivity)
-        HttpUtil.httpGetWithToken(ConstantUrl.LOGOUT_URL,
+        httpGetWithToken(ConstantUrl.LOGOUT_URL,
             null, SharedPreferenceUtil.getUserInfo(this@PersonalInfoActivity).token, object : StringCallback() {
                 override fun onError(call: Call?, response: Response?, e: java.lang.Exception?) {
                     super.onError(call, response, e)
@@ -197,6 +199,9 @@ class PersonalInfoActivity : BaseActivity(), View.OnClickListener {
                         val broadcastIntent = Intent()
                         broadcastIntent.action = ConstantString.BROAD_CAST_REFRESH_LOGOUT_DATA
                         BroadCastManager.getInstance().sendBroadCast(this@PersonalInfoActivity, broadcastIntent)
+                        ActivityManager.getActivityManagerInstance().clearAllActivity()
+//                        startActivity<LoginActivity>()
+
                         finish()
                     } else {
                         toast(jsonObject.getString("msg"))

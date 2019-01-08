@@ -15,6 +15,8 @@ public class LoginBackModel implements Serializable {
     private String shopUrl;
     private String discountUrl;
     private String nickName;
+    private String homeUrl;
+
     @Override
     public String toString() {
         return "LoginBackModel{" +
@@ -22,7 +24,15 @@ public class LoginBackModel implements Serializable {
                 ", shopUrl='" + shopUrl + '\'' +
                 ", discountUrl='" + discountUrl + '\'' +
                 ", nickName='" + nickName + '\'' +
+                ", homeUrl='" + homeUrl + '\'' +
                 '}';
+    }
+
+    public String getHomeUrl() {
+        return homeUrl;
+    }
+    public void setHomeUrl(String homeUrl) {
+        this.homeUrl = homeUrl;
     }
 
     public String getToken() {

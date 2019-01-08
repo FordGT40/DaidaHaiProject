@@ -8,6 +8,7 @@ import com.wisdom.ConstantUrl
 import com.wisdom.project.R
 import com.wisdom.project.base.BaseActivity
 import com.wisdom.project.base.BroadCastManager
+import com.wisdom.project.homepage.activity.HomePageActivity
 import com.wisdom.project.login.model.LoginBackModel
 import com.wisdom.project.util.RegularUtil
 import com.wisdom.project.util.SharedPreferenceUtil
@@ -57,6 +58,15 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                 login_psw.inputType = 0x81//不可见
             }
         }
+//判断用户是否登陆过
+        if (SharedPreferenceUtil.getUserInfo(this@LoginActivity) == null) {
+            //没有登陆过
+        } else {
+            //登陆过
+            startActivity<HomePageActivity>()
+            this@LoginActivity.finish()
+        }
+
     }
 
     /**
@@ -71,7 +81,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                 //快速注册按钮点击事件
                 startActivity<RegisterActivity>()
                 this.finish()
-        }
+            }
             R.id.iv_login_delete -> {
                 //账号后清空按钮点击事件
                 login_accout.setText("")
@@ -108,6 +118,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                         ConstantString.SP_USER_LOGIN_MODEL_KEY, t!!.data
                     )
                     toast(R.string.login_succeed)
+                    startActivity<HomePageActivity>()
                     //发送广播，刷新界面
                     val broadcastIntent = Intent()
                     broadcastIntent.action = ConstantString.BROAD_CAST_REFRESH_PAGE_DATA
