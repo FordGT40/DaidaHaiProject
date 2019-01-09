@@ -76,10 +76,22 @@ class MineFragment : Fragment(), View.OnClickListener {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        val refreshIntent = Intent()
+        val logoutIntent = Intent()
+        refreshIntent.action = ConstantString.BROAD_CAST_REFRESH_PAGE_DATA
+        logoutIntent.action = ConstantString.BROAD_CAST_REFRESH_LOGOUT_DATA
+        val pm = activity?.packageManager
+        val resolveInfosRefresh = pm?.queryBroadcastReceivers(refreshIntent, 0)
+        val resolveInfosLogout = pm?.queryBroadcastReceivers(logoutIntent, 0)
         //注册刷新数据的广播接收者
-        activity?.registerReceiver(refreshDataReceiver, IntentFilter(ConstantString.BROAD_CAST_REFRESH_PAGE_DATA))
+        if (resolveInfosRefresh == null && resolveInfosRefresh!!.isEmpty()) {
+            activity?.registerReceiver(refreshDataReceiver, IntentFilter(ConstantString.BROAD_CAST_REFRESH_PAGE_DATA))
+        }
         //注册刷新退出登录的广播接收者
-        activity?.registerReceiver(logoutDataReceiver, IntentFilter(ConstantString.BROAD_CAST_REFRESH_LOGOUT_DATA))
+        if (resolveInfosLogout == null && resolveInfosLogout!!.isEmpty()) {
+            activity?.registerReceiver(logoutDataReceiver, IntentFilter(ConstantString.BROAD_CAST_REFRESH_LOGOUT_DATA))
+        }
+
     }
 
     /**

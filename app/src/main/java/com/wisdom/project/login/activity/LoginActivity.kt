@@ -62,9 +62,12 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         if (SharedPreferenceUtil.getUserInfo(this@LoginActivity) == null) {
             //没有登陆过
         } else {
-            //登陆过
-            startActivity<HomePageActivity>()
-            this@LoginActivity.finish()
+            //登陆过 且是第一次登陆
+            if (ConstantString.IS_FIRST_LOGIN) {
+                startActivity<HomePageActivity>()
+                this@LoginActivity.finish()
+                ConstantString.IS_FIRST_LOGIN=false
+            }
         }
 
     }
