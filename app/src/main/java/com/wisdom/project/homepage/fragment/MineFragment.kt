@@ -58,7 +58,7 @@ class MineFragment : Fragment(), View.OnClickListener {
     lateinit var progressDialog: ProgressDialog
     private val refreshDataReceiver = RefreshDataReceiver()
     private val logoutDataReceiver = LogoutDataReceiver()
-    private var  isUserVisable:Boolean = false
+    private var isUserVisable: Boolean = false
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_mine, null, false)
     }
@@ -102,9 +102,8 @@ class MineFragment : Fragment(), View.OnClickListener {
      */
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-
         if (isVisibleToUser) {
-            isUserVisable=isVisibleToUser
+            isUserVisable = isVisibleToUser
             if (context?.getSharedPreferences(ConstantString.SHARE_PER_INFO, 0) != null) {
                 if (SharedPreferenceUtil.getUserInfo(context) == null) {
                     //没有登陆过
