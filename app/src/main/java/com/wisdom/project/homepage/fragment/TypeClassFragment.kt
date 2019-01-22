@@ -64,4 +64,22 @@ class TypeClassFragment : Fragment() {
         }
     }
 
+    /**
+     *  @describe 刷新界面的方法
+     *  @return
+     *  @author HanXueFeng
+     *  @time 2019/1/22  8:52
+     */
+    public fun reloadPage(){
+        if (SharedPreferenceUtil.getUserInfo(context) != null) {
+            val url = SharedPreferenceUtil.getUserInfo(context).shopUrl
+            if (!webView.url.equals(url)) {
+                webView.loadUrl(url)
+            }
+        } else {
+            U.closeLoadingDialog()
+            context?.toast("获取信息失败，请重试")
+        }
+    }
+
 }

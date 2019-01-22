@@ -60,9 +60,26 @@ class NinePointNineFragment : Fragment() {
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        if(isVisibleToUser){
+        if (isVisibleToUser) {
 //            U.showLoadingDialog(context)
         }
     }
 
+    /**
+     *  @describe 刷新界面方法
+     *  @return
+     *  @author HanXueFeng
+     *  @time 2019/1/22  8:52
+     */
+    public fun reloadPage() {
+        if (SharedPreferenceUtil.getUserInfo(context) != null) {
+            val url = SharedPreferenceUtil.getUserInfo(context).discountUrl
+            if (!webView.url.equals(url)) {
+                webView.loadUrl(url)
+            }
+        } else {
+            U.closeLoadingDialog()
+            context?.toast("获取信息失败，请重试")
+        }
+    }
 }

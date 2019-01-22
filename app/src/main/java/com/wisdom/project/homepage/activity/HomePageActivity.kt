@@ -47,7 +47,10 @@ class HomePageActivity : BaseActivity() {
 
     override fun initViews() {
         setTabs(tab_home, layoutInflater, TAB_TITLES, TAB_IMGS)
-        TAB_FRAGMENTS= arrayOf(HomepageFragment(),NinePointNineFragment(),TypeClassFragment(),MineFragment())
+        val homepageFragment = HomepageFragment()
+        val ninePointNineFragment = NinePointNineFragment()
+        val typeClassFragment = TypeClassFragment()
+        TAB_FRAGMENTS = arrayOf(homepageFragment, ninePointNineFragment, typeClassFragment, MineFragment())
         vp_home.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tab_home))
         vp_home.setAdapter(MyViewPagerAdapter(supportFragmentManager))
         tab_home.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -62,6 +65,15 @@ class HomePageActivity : BaseActivity() {
                 //                } else {
                 vp_home.setCurrentItem(tab.position, false)
                 // }
+
+//                点击下导航刷新页面数据
+                if (tab.position == 0) {
+                    homepageFragment.reloadPage()
+                } else if (tab.position == 1) {
+                    ninePointNineFragment.reloadPage()
+                } else if (tab.position == 2) {
+                    typeClassFragment.reloadPage()
+                }
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {

@@ -28,7 +28,6 @@ class HomepageFragment : Fragment() {
     }
 
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 //        U.showLoadingDialog(context)
@@ -61,5 +60,22 @@ class HomepageFragment : Fragment() {
         }
     }
 
+    /**
+     *  @describe 刷新当前页面
+     *  @return 
+     *  @author HanXueFeng
+     *  @time 2019/1/22  8:47
+     */
+    public fun reloadPage() {
+        if (SharedPreferenceUtil.getUserInfo(context) != null) {
+            val url = SharedPreferenceUtil.getUserInfo(context).homeUrl
+            if (!webView.url.equals(url)) {
+                webView.loadUrl(url)
+            }
+        } else {
+            U.closeLoadingDialog()
+            context?.toast("获取信息失败，请重试")
+        }
+    }
 
 }
