@@ -46,7 +46,7 @@
                     android:textSize="@dimen/font_size_18sp"
                     android:text="@string/login_accout"
                     />
-
+            <!--android:text="18686703845"-->
             <EditText
                     android:text="18686703845"
                     android:inputType="phone"
@@ -99,7 +99,7 @@
                     android:textSize="@dimen/font_size_18sp"
                     android:text="@string/login_psw"
                     />
-
+            <!--android:text="123456"-->
             <EditText
                     android:text="123456"
                     android:inputType="textPassword"

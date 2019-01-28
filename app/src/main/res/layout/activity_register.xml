@@ -31,7 +31,7 @@
                     android:adjustViewBounds="true"
                     android:scaleType="fitXY"
                     android:layout_centerInParent="true"
-                    android:src="@mipmap/ic_launcher"
+                    android:src="@drawable/tubiao"
             />
         </RelativeLayout>
 
@@ -209,7 +209,7 @@
                     android:hint="@string/register_code_hint"
                     android:id="@+id/register_code"
                     android:background="@null"
-                    android:layout_toLeftOf="@+id/tv_get_code"
+
                     android:layout_marginLeft="@dimen/distance_10dp"
                     android:layout_toRightOf="@+id/register_code_text"
             />

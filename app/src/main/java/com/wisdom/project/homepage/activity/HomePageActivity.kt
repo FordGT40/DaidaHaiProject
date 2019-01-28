@@ -15,6 +15,8 @@ import com.wisdom.project.homepage.fragment.MineFragment
 import com.wisdom.project.homepage.fragment.NinePointNineFragment
 import com.wisdom.project.homepage.fragment.TypeClassFragment
 import kotlinx.android.synthetic.main.activity_home_page.*
+import org.jetbrains.anko.toast
+
 
 /**
  * @ProjectName project： ExtraProject
@@ -41,15 +43,15 @@ class HomePageActivity : BaseActivity() {
     //Tab 数目
     val COUNT = TAB_TITLES.size
 
+    val homepageFragment = HomepageFragment()
+    val ninePointNineFragment = NinePointNineFragment()
+    val typeClassFragment = TypeClassFragment()
     override fun setlayoutIds() {
         setContentView(R.layout.activity_home_page)
     }
 
     override fun initViews() {
         setTabs(tab_home, layoutInflater, TAB_TITLES, TAB_IMGS)
-        val homepageFragment = HomepageFragment()
-        val ninePointNineFragment = NinePointNineFragment()
-        val typeClassFragment = TypeClassFragment()
         TAB_FRAGMENTS = arrayOf(homepageFragment, ninePointNineFragment, typeClassFragment, MineFragment())
         vp_home.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tab_home))
         vp_home.setAdapter(MyViewPagerAdapter(supportFragmentManager))
@@ -66,7 +68,16 @@ class HomePageActivity : BaseActivity() {
                 vp_home.setCurrentItem(tab.position, false)
                 // }
 
-//                点击下导航刷新页面数据
+
+
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab) {
+
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab) {
+                // 点击下导航刷新页面数据
                 if (tab.position == 0) {
                     homepageFragment.reloadPage()
                 } else if (tab.position == 1) {
@@ -75,15 +86,9 @@ class HomePageActivity : BaseActivity() {
                     typeClassFragment.reloadPage()
                 }
             }
-
-            override fun onTabUnselected(tab: TabLayout.Tab) {
-
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab) {
-
-            }
         })
+
+
     }
 
     /**
@@ -117,4 +122,7 @@ class HomePageActivity : BaseActivity() {
             return COUNT
         }
     }
+
+
+
 }
