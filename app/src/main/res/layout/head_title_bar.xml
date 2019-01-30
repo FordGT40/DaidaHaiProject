@@ -34,9 +34,12 @@
     <ImageView
             android:id="@+id/head_back_iv"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+           android:layout_marginBottom="@dimen/distance_15dp"
+            android:layout_marginTop="@dimen/distance_15dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
             android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/distance_20dp"
             android:src="@drawable/fanhui"/>
 
