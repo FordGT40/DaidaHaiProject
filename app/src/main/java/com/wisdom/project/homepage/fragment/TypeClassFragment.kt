@@ -15,6 +15,7 @@ import com.wisdom.project.R
 import com.wisdom.project.util.SharedPreferenceUtil
 import com.wisdom.project.util.U
 import kotlinx.android.synthetic.main.fragment_type_class.*
+import kotlinx.android.synthetic.main.head_title_bar.*
 import org.jetbrains.anko.toast
 
 /**
@@ -40,6 +41,11 @@ class TypeClassFragment : Fragment() {
     @SuppressLint("ObsoleteSdkInt", "SetJavaScriptEnabled")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        head_back_iv.setOnClickListener {
+            webView.goBack()
+        }
+        comm_head_title.text="粉丝福利购"
         val webSettings = webView?.settings
 /**
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -161,6 +167,12 @@ class TypeClassFragment : Fragment() {
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
                 //页面加载结束
+                val url = SharedPreferenceUtil.getUserInfo(context).shopUrl
+                if (!webView.url.equals(url)) {
+                    ll_top.visibility=View.VISIBLE
+                }else{
+                    ll_top.visibility=View.GONE
+                }
                 U.closeLoadingDialog()
             }
         }

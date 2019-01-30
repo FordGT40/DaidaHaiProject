@@ -260,9 +260,9 @@ class MineFragment : Fragment(), View.OnClickListener {
      *  @time 2019/1/3  16:43
      */
     private fun getUserInfo() {
-        if (isUserVisable) {
-            U.showLoadingDialog(activity)
-        }
+//        if (isUserVisable) {
+//            U.showLoadingDialog(activity)
+//        }
         if (SharedPreferenceUtil.getUserInfo(context) != null) {
             HttpUtil.httpGetWithToken(ConstantUrl.GET_PERSONAL_INFO_URL, null
                 , SharedPreferenceUtil.getUserInfo(context).token,

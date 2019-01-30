@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -12,6 +13,7 @@ import com.wisdom.project.R
 import com.wisdom.project.util.SharedPreferenceUtil
 import com.wisdom.project.util.U
 import kotlinx.android.synthetic.main.fragment_homepage.*
+import kotlinx.android.synthetic.main.head_title_bar.*
 import org.jetbrains.anko.toast
 
 /**
@@ -30,13 +32,25 @@ class HomepageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        head_back_iv.setOnClickListener {
+            webView.goBack()
+        }
+        comm_head_title.text="粉丝福利购"
 //        U.showLoadingDialog(context)
         webView.webViewClient = object : WebViewClient() {
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
+                val url = SharedPreferenceUtil.getUserInfo(context).homeUrl
+                if (!webView.url.equals(url)) {
+                    ll_top.visibility=View.VISIBLE
+                }else{
+                    ll_top.visibility=View.GONE
+                }
                 //页面加载结束
                 U.closeLoadingDialog()
             }
+
+
         }
         val webSettings = webView?.settings
         webSettings?.domStorageEnabled = true

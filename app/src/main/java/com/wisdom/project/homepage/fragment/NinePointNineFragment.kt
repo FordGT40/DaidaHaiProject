@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -12,6 +13,7 @@ import com.wisdom.project.R
 import com.wisdom.project.util.SharedPreferenceUtil
 import com.wisdom.project.util.U
 import kotlinx.android.synthetic.main.fragment_nine_point_nine.*
+import kotlinx.android.synthetic.main.head_title_bar.*
 
 import org.jetbrains.anko.toast
 
@@ -30,6 +32,13 @@ class NinePointNineFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        head_back_iv.setOnClickListener {
+            webView.goBack()
+        }
+        comm_head_title.text="粉丝福利购"
+
+
         val webSettings = webView?.settings
         webSettings?.domStorageEnabled = true
         webSettings?.setSupportZoom(true) //支持缩放，默认为true。是下面那个的前提。
@@ -46,7 +55,20 @@ class NinePointNineFragment : Fragment() {
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
                 //页面加载结束
+                val url = SharedPreferenceUtil.getUserInfo(context).discountUrl
+                println("url1:+${webView.url}")
+                println("url2:+$url")
+                if (webView.url != url) {
+                    ll_top.visibility=View.VISIBLE
+                }else{
+                    ll_top.visibility=View.GONE
+                }
                 U.closeLoadingDialog()
+            }
+
+            override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+
+                return super.shouldOverrideUrlLoading(view, request)
             }
         }
         if (SharedPreferenceUtil.getUserInfo(context) != null) {
@@ -56,6 +78,7 @@ class NinePointNineFragment : Fragment() {
             U.closeLoadingDialog()
             context?.toast("获取信息失败，请重试")
         }
+
     }
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
