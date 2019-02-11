@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -25,7 +26,7 @@ public abstract  class BaseFragment extends Fragment {
 
     protected Context context;
     protected TextView title;
-    protected ImageView backIv;
+    protected LinearLayout backIv;
     protected TextView right;
     protected ImageView rightIv;
     protected View rootView;
@@ -43,7 +44,7 @@ public abstract  class BaseFragment extends Fragment {
     }
     public void initHeadView() {
         title = (TextView) rootView.findViewById(R.id.comm_head_title);
-        backIv = (ImageView) rootView.findViewById(R.id.head_back_iv);
+        backIv = (LinearLayout) rootView.findViewById(R.id.head_back_iv);
         right = (TextView) rootView.findViewById(R.id.head_right);
         rightIv = (ImageView) rootView.findViewById(R.id.head_right_iv);
     }

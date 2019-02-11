@@ -9,6 +9,7 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import com.wisdom.project.R;
@@ -21,7 +22,7 @@ public abstract class BaseActivity extends FragmentActivity {
 
     protected Context context;
     protected TextView title;
-    protected ImageView backIv;
+    protected LinearLayout backIv;
     protected TextView right;
     protected ImageView rightIv;
     private WeakReferenceActivity mActivity;
@@ -58,7 +59,7 @@ public abstract class BaseActivity extends FragmentActivity {
 
     public void initHeadView() {
         title = (TextView) findViewById(R.id.comm_head_title);
-        backIv = (ImageView) findViewById(R.id.head_back_iv);
+        backIv = (LinearLayout) findViewById(R.id.head_back_iv);
         right = (TextView) findViewById(R.id.head_right);
         rightIv = (ImageView) findViewById(R.id.head_right_iv);
         if (backIv != null)

@@ -31,17 +31,29 @@
             android:textSize="16sp"
             android:visibility="gone"/>
 
-    <ImageView
+    <LinearLayout
             android:id="@+id/head_back_iv"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-           android:layout_marginBottom="@dimen/distance_15dp"
-            android:layout_marginTop="@dimen/distance_15dp"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"
+            android:orientation="vertical"
+            android:layout_width="50dp"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/distance_10dp"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="@dimen/distance_20dp"
-            android:src="@drawable/fanhui"/>
+            android:paddingLeft="@dimen/distance_5dp"
+            android:layout_centerVertical="true"
+            android:paddingBottom="@dimen/distance_5dp"
+            android:layout_height="match_parent">
+
+        <ImageView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+
+
+                android:src="@drawable/fanhui"/>
+    </LinearLayout>
 
     <TextView
             android:id="@+id/head_right"
