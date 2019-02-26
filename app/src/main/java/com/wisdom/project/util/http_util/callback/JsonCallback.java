@@ -115,18 +115,19 @@ public abstract class JsonCallback<T> extends AbsCallback<T> {
                 BaseModel baseModel = Convert.fromJson(responseStr, type);
                 response.close();
                 return (T) baseModel;
-            }  else if (code == ConstantString.INSTANCE.getCODE_TOKEN_ILLEGAL()) {
+            } else if (code == ConstantString.INSTANCE.getCODE_TOKEN_ILLEGAL()) {
                 ConstantString.INSTANCE.setLOGIN_STATE(false);
                 ActivityManager.getActivityManagerInstance().clearAllActivity();
                 Intent intent = new Intent(AppApplication.Companion.getInstance(), LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 AppApplication.Companion.getInstance().startActivity(intent);
                 throw new IllegalStateException("登录过期");
+            } else if (code == 203 || code == 404) {
+                throw new IllegalStateException(getErrorMsg(responseStr));
             } else if (code == 500) {
 //                找不到文件的错误。不toast
                 throw new IllegalStateException("系统异常");
-            }
-            else {
+            } else {
                 Log.i(TAG, "错误代码：" + code + "，错误信息：" + getErrorMsg(responseStr));
                 throw new IllegalStateException("系统异常");
             }

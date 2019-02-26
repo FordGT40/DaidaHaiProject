@@ -56,12 +56,12 @@ class NinePointNineFragment : Fragment() {
                 super.onPageFinished(view, url)
                 //页面加载结束
                 val url = SharedPreferenceUtil.getUserInfo(context).discountUrl
-                println("url1:+${webView.url}")
-                println("url2:+$url")
-                if (webView.url != url) {
-                    ll_top.visibility=View.VISIBLE
+//                println("url1:+${webView.url}")
+//                println("url2:+$url")
+                if (webView?.url != url) {
+                    ll_top?.visibility=View.VISIBLE
                 }else{
-                    ll_top.visibility=View.GONE
+                    ll_top?.visibility=View.GONE
                 }
                 U.closeLoadingDialog()
             }
